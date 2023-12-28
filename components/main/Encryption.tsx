@@ -67,13 +67,13 @@ const Encryption = () => {
           ></textarea>
           <button className='flex flex-col items-center group cursor-pointer w-auto h-auto p-2 rounded-full'>
             <Image
-              src='/LockTop.png'
+              src='LockTop.png'
               alt='Lock top'
               width={50}
               height={50}
               className='w-[50px] translate-y-5 transition-all duration-200 group-hover:translate-y-11'
             />
-            <Image src='/LockMain.png' alt='Lock Main' width={70} height={70} className='' />
+            <Image src='LockMain.png' alt='Lock Main' width={70} height={70} className='' />
           </button>
         </form>
         <ToastContainer position='top-center' theme='dark' autoClose={1500} />
@@ -87,7 +87,7 @@ const Encryption = () => {
           playsInline
           preload='false'
           className='w-full h-auto z-[-10]'
-          src='/encryption.webm/'
+          src='encryption.webm/'
         />
       </div>
     </div>

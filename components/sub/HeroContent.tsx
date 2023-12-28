@@ -11,13 +11,15 @@ const HeroContent = () => {
     <motion.div
       initial='hidden'
       animate='visible'
-      className='flex flex-row items-center justify-between gap-24 px-20 mt-48 w-full z-[20]'
+      className='flex flex-col lg:flex-row items-center justify-between gap-24 px-20 mt-48 w-full z-[20]'
     >
       <div className='h-full w-full flex flex-col gap-5 justify-center m-auto text-start'>
         <motion.div variants={slideInFromTop} className='Welcome-box p-2 border border-[#7042f88b] opacity-[0.9]'>
           <SparklesIcon className='text-[#b49bff] mr-[10px] h-8 w-8' />
-          <h1 className='Welcome-text text-lg tracking-wider'>
-            Fullstack Developer | DevOps Engineer | Electrical Engineer
+          <h1 className='Welcome-text text-lg tracking-wider flex flex-col md:flex-row py-2'>
+            <span> - Fullstack Developer </span>
+            <span> - DevOps Engineer </span>
+            <span> - Electrical Engineer</span>
           </h1>
         </motion.div>
 
@@ -50,14 +52,14 @@ const HeroContent = () => {
         </motion.a>
       </div>
       <Image
-        src='/main.png'
+        src='main.png'
         alt='work icons'
         height={500}
         width={400}
         className='object-contain h-96 w-96 rounded-full p-8 border-2  shadow-slate-600 filter shadow-lg'
       />
       <motion.div variants={slideInFromRight(0.8)} className='w-full h-full flex justify-evenly items-center '>
-        <Image src='/mainIconsdark.svg' alt='work icons' height={500} width={400} className='object-contain' />
+        <Image src='mainIconsdark.svg' alt='work icons' height={500} width={400} className='object-contain' />
       </motion.div>
     </motion.div>
   );
