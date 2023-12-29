@@ -16,10 +16,10 @@ const ProjectCard = ({ src, title, description, link, github }: Props) => {
       <div className=' bg-gradient-radial from-sky-500  to-emerald-500 opacity-0 hover:opacity-80 transition-opacity duration-200 h-full w-full absolute rounded-lg p-4 pt-8 z-40'>
         <div className='flex flex-row items-center justify-center h-1/2 w-full gap-12 '>
           <Link href={github} target='_blank'>
-            <Image src='github.svg' alt='arrow right' width={70} height={70} />
+            <Image src='/github.svg' alt='arrow right' width={70} height={70} />
           </Link>
           <Link href={link} target='_blank'>
-            <Image src='google.png' alt='arrow right' width={70} height={70} />
+            <Image src='/google.png' alt='arrow right' width={70} height={70} />
           </Link>
         </div>
         <p className='mt-2 text-lg font-bold text-black'>{description}</p>

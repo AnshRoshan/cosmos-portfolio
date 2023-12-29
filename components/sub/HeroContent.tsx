@@ -52,14 +52,14 @@ const HeroContent = () => {
         </motion.a>
       </div>
       <Image
-        src='main.png'
+        src='/main.png'
         alt='work icons'
         height={500}
         width={400}
         className='object-contain h-96 w-96 rounded-full p-8 border-2  shadow-slate-600 filter shadow-lg'
       />
       <motion.div variants={slideInFromRight(0.8)} className='w-full h-full flex justify-evenly items-center '>
-        <Image src='mainIconsdark.svg' alt='work icons' height={500} width={400} className='object-contain' />
+        <Image src='/mainIconsdark.svg' alt='work icons' height={500} width={400} className='object-contain' />
       </motion.div>
     </motion.div>
   );
