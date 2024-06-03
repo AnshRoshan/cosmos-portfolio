@@ -1,0 +1,113 @@
+---
+title: "Understanding and Implementing Three Python Solutions"
+date: "2024-04-01"
+tags: ['python','problem-solving','leetcode']
+description: "Exploring and implementing Python solutions for three different problems: Product of Array Except Self, Valid Sudoku, and Longest Consecutive Sequence."
+author: "Ansh Roshan"
+---
+
+# Understanding and Implementing Three Python Solutions
+
+In this blog post, we'll explore and implement three Python solutions to different problems: 
+
+1. Product of Array Except Self
+2. Valid Sudoku
+3. Longest Consecutive Sequence
+
+Let's dive into each solution and understand how it works.
+
+## 1. Product of Array Except Self
+
+**Problem Statement:** Given an array `nums` of n integers, return an array `ans` such that `ans[i]` is equal to the product of all the elements of `nums` except `nums[i]`.
+
+**Solution Approach:**
+- Initialize a list `ans` of length `n` with all elements as `1`.
+- Iterate through the array `nums` from left to right, updating `ans[i]` to store the product of all elements to the left of `nums[i]`.
+- Then, iterate through the array from right to left, updating `ans[i]` to store the product of all elements to the right of `nums[i]`.
+- Finally, return the `ans` array.
+
+```python
+class Solution:
+    def productExceptSelf(self, nums):
+        n = len(nums)
+        ans = [1] * n
+        for i in range(1, n):
+            ans[i] = ans[i-1] * nums[i-1]
+            
+        postfix = 1
+        for i in range(n-1,-1,-1):
+            ans[i] *= postfix
+            postfix *= nums[i]
+
+        return ans
+```
+
+## 2. Valid Sudoku
+
+**Problem Statement:** Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+1. Each row must contain the digits 1-9 without repetition.
+2. Each column must contain the digits 1-9 without repetition.
+3. Each of the nine 3x3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+
+**Solution Approach:**
+- Use sets to keep track of digits in rows, columns, and sub-boxes.
+- Traverse the Sudoku board and validate each digit according to the rules.
+- If a digit violates any rule, return `False`. Otherwise, return `True`.
+
+```python
+class Solution:
+    def isValidSudoku(self, board):
+        row = defaultdict(set)
+        col = defaultdict(set)
+        grid = defaultdict(set)
+        for i in range(9):
+            for j in range(9):
+                val = board[i][j]
+                if val.isalnum():
+                    k = i//3 * 3 + j//3
+                    if val in row[i] or val in col[j] or val in grid[k]:
+                        return False
+                    else:
+                        row[i].add(val)
+                        col[j].add(val)
+                        grid[k].add(val)
+
+        return True
+```
+
+## 3. Longest Consecutive Sequence
+
+**Problem Statement:** Given an unsorted array of integers `nums`, return the length of the longest consecutive elements sequence.
+
+**Solution Approach:**
+- Convert the array into a set for efficient lookup.
+- Iterate through the set, and for each element, check if the consecutive sequence exists to its left and right.
+- Remove elements from the set as they are encountered to avoid redundant checks.
+- Update the maximum length of the consecutive sequence.
+
+```python
+class Solution:
+    def longestConsecutive(self, nums):
+        num_set = set(nums)
+        max_length = 0
+        
+        while num_set:
+            current_num = num_set.pop()
+            left_num = current_num - 1
+            right_num = current_num + 1
+            
+            while left_num in num_set:
+                num_set.remove(left_num)
+                left_num -= 1
+            
+            while right_num in num_set:
+                num_set.remove(right_num)
+                right_num += 1
+            
+            sequence_length = right_num - left_num - 1
+            max_length = max(max_length, sequence_length)
+        
+        return max_length
+```
+
+These Python solutions provide efficient ways to solve the respective problems. Understanding these solutions can enhance your problem-solving skills and proficiency in Python programming.
