@@ -1,26 +1,29 @@
-import { posts } from '#site/content'
-import { MDXContent } from '@/components/main/mdx-components'
-import { notFound } from 'next/navigation'
-import './style.css'
-import { Metadata } from 'next'
-import { siteConfig } from '@/config/site'
-import { Tag } from '@/components/sub/Tag'
+import { posts } from "#site/content";
+import { MDXContent } from "@/components/main/mdx-components";
+import { notFound } from "next/navigation";
+import "./style.css";
+import { Metadata } from "next";
+import { siteConfig } from "@/config/site";
+import { Tag } from "@/components/sub/Tag";
+import Link from "next/link";
 
 interface PostPageProps {
     params: {
-        slug: string[]
-    }
+        slug: string[];
+    };
 }
 
-export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
-    const post = await getPostFromParams(params)
+export async function generateMetadata({
+    params,
+}: PostPageProps): Promise<Metadata> {
+    const post = await getPostFromParams(params);
 
     if (!post) {
-        return {}
+        return {};
     }
 
-    const ogSearchParams = new URLSearchParams()
-    ogSearchParams.set('title', post.title)
+    const ogSearchParams = new URLSearchParams();
+    ogSearchParams.set("title", post.title);
 
     return {
         title: post.title,
@@ -29,7 +32,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
         openGraph: {
             title: post.title,
             description: post.description,
-            type: 'article',
+            type: "article",
             url: post.slug,
             images: [
                 {
@@ -41,42 +44,55 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
             ],
         },
         twitter: {
-            card: 'summary_large_image',
+            card: "summary_large_image",
             title: post.title,
             description: post.description,
             images: [`/api/og?${ogSearchParams.toString()}`],
         },
-    }
+    };
 }
 
-async function getPostFromParams(params: PostPageProps['params']) {
-    const slug = params?.slug?.join('/')
-    const post = posts.find((post) => post.slugAsParams === slug)
-    return post
+async function getPostFromParams(params: PostPageProps["params"]) {
+    const slug = params?.slug?.join("/");
+    const post = posts.find((post) => post.slugAsParams === slug);
+    return post;
 }
 
-export async function generateStaticParams(): Promise<PostPageProps['params'][]> {
-    return posts.map((post) => ({ slug: post.slugAsParams.split('/') }))
+export async function generateStaticParams(): Promise<
+    PostPageProps["params"][]
+> {
+    return posts.map((post) => ({ slug: post.slugAsParams.split("/") }));
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-    const post = await getPostFromParams(params)
+    const post = await getPostFromParams(params);
 
     if (!post || !post.published) {
-        notFound()
+        notFound();
     }
 
     return (
-        <article className='container prose mx-auto max-w-7xl py-6 dark:prose-invert'>
-            <h1 className='mb-2'>{post.title}</h1>
+        <article className="container prose mx-auto max-w-7xl py-6 dark:prose-invert">
+            <h1 className="mb-4 text-5xl leading-normal">{post.title}</h1>
             {post.description ? (
-                <p className='mt-0 text-xl text-muted-foreground'>{post.description}</p>
+                <p className="mt-0 text-lg text-muted-foreground">
+                    {post.description}
+                </p>
             ) : null}
-            <div className='mb-2 flex gap-2'>
+            <div className="mb-2 flex gap-2">
                 {post.tags?.map((tag) => <Tag tag={tag} key={tag} />)}
             </div>
-            <hr className='my-4' />
+            <hr className="my-4" />
             <MDXContent code={post.body} />
+            <hr className="my-4" />
+            <div className="flex items-center justify-between">
+                <p className="text-muted-foreground">
+                    Published on {new Date(post.date).toLocaleDateString()}
+                </p>
+                <Link href="/blog" className="text-primary">
+                    Back to blog
+                </Link>
+            </div>
         </article>
-    )
+    );
 }

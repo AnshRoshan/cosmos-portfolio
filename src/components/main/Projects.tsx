@@ -15,7 +15,7 @@ const Projects_db = [
     },
     {
         title: "Collection Of React Projects",
-        src: "/React.jpg",
+        src: "/project-react.jpeg",
         description:
             "A collection of React projects built with MERN stack. with Tailwind CSS viejs and more.",
         link: "https://anshroshan.github.io/React-Projects/",
@@ -27,7 +27,7 @@ const Projects_db = [
         src: "/Instagram.jpg",
         description:
             "A social media app built with Next.js, Tailwind CSS , MongoDB .",
-        link: "https://anshroshan.vercel.app/",
+        link: "https://anshmeta.netlify.app/",
         github: "https://github.com/AnshRoshan/social-app",
         tailwind: "col-span-2 h-80",
     },
@@ -36,7 +36,7 @@ const Projects_db = [
         src: "/ecommerce.webp",
         description:
             "A Ecommerce website built with Next.js, Tailwind CSS , MongoDB , Stripe Payment",
-        link: "https://anshroshan.vercel.app/",
+        link: "https://anshstore.vercel.app/",
         github: "https://github.com/AnshRoshan/eshop",
         tailwind: "h-80",
     },

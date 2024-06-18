@@ -15,7 +15,7 @@ const HeroContent = () => {
         >
             <div className="m-auto flex w-full flex-col justify-center gap-5 text-start">
                 <Spotlight
-                    className="z-100 -top-40 left-0 md:-top-20 md:left-60"
+                    className="-top-60 left-0  md:-top-40 "
                     fill="white"
                 />
                 <motion.div
