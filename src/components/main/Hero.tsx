@@ -7,7 +7,7 @@ const Hero = () => {
                 autoPlay
                 muted
                 loop
-                className="object-fit absolute left-0 top-[-50%] -z-[100] hidden h-full w-full min-w-full rotate-180 dark:block lg:top-[-50%]"
+                className="-z-[100] absolute top-[-50%] left-0 hidden h-full w-full min-w-full rotate-180 object-fit lg:top-[-50%] dark:block"
             >
                 <source src="/blackhole.webm" type="video/webm" />
             </video>

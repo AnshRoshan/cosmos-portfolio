@@ -1,10 +1,10 @@
-import { posts } from "#site/content";
-import { PostItem } from "@/components/sub/post-item";
 import { QueryPagination } from "@/components/sub/QueryPagination";
 import { Tag } from "@/components/sub/Tag";
+import { PostItem } from "@/components/sub/post-item";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getAllTags, sortPosts, sortTagsByCount } from "@/lib/utils";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { posts } from "#site/content";
 
 export const metadata: Metadata = {
     title: "My blog",
@@ -34,10 +34,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         <div className="container z-30 max-w-5xl py-6 lg:py-10 ">
             <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
                 <div className="flex-1 space-y-4">
-                    <h1 className="inline-block text-4xl font-black lg:text-5xl">
+                    <h1 className="inline-block font-black text-4xl lg:text-5xl">
                         Blog
                     </h1>
-                    <p className="text-xl text-muted-foreground">
+                    <p className="text-muted-foreground text-xl">
                         My ramblings on all things web dev.
                     </p>
                 </div>

@@ -1,8 +1,8 @@
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 interface Props {
     src: string;
@@ -24,15 +24,15 @@ const ProjectCard = ({
     return (
         <div
             className={cn(
-                "z-30 mx-auto flex w-full cursor-pointer flex-wrap items-center  justify-center overflow-hidden rounded-lg border-8 border-white/20 from-sky-400/20 to-emerald-500/20 shadow-inner backdrop-blur-lg hover:bg-gradient-to-r",
+                "z-30 mx-auto flex w-full cursor-pointer flex-wrap items-center justify-center overflow-hidden rounded-lg border-8 border-white/20 from-sky-400/20 to-emerald-500/20 shadow-inner backdrop-blur-lg hover:bg-gradient-to-r",
                 tailwind
             )}
         >
             <div className="h-1/2 w-full p-4">
-                <h1 className="text-xl font-semibold text-white underline">
+                <h1 className="font-semibold text-white text-xl underline">
                     {title}
                 </h1>
-                <p className="text-md mt-2 font-bold text-neutral-500">
+                <p className="mt-2 font-bold text-md text-neutral-500">
                     {description}
                 </p>
                 <Link

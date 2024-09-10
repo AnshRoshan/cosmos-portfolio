@@ -69,12 +69,12 @@ const RecentProjects = () => {
                                 />
                             </div>
 
-                            <h1 className="line-clamp-1 text-base font-bold md:text-xl lg:text-2xl">
+                            <h1 className="line-clamp-1 font-bold text-base md:text-xl lg:text-2xl">
                                 {item.title}
                             </h1>
 
                             <p
-                                className="line-clamp-2 text-sm font-light lg:text-xl lg:font-normal"
+                                className="line-clamp-2 font-light text-sm lg:font-normal lg:text-xl"
                                 style={{
                                     color: "#BEC1DD",
                                     margin: "1vh 0",
@@ -83,11 +83,11 @@ const RecentProjects = () => {
                                 {item.des}
                             </p>
 
-                            <div className="mb-3 mt-7 flex items-center justify-between">
+                            <div className="mt-7 mb-3 flex items-center justify-between">
                                 <div className="flex items-center">
                                     {item.iconLists.map((icon, index) => (
                                         <div
-                                            key={index}
+                                            key={`${index}-${icon}`}
                                             className="flex h-8 w-8 items-center justify-center rounded-full border border-white/[.2] bg-black lg:h-10 lg:w-10"
                                             style={{
                                                 transform: `translateX(-${5 * index + 2}px)`,
@@ -106,7 +106,7 @@ const RecentProjects = () => {
                                     href={item.github}
                                     className="flex items-center justify-center"
                                 >
-                                    <p className="text-purple flex text-sm md:text-xs lg:text-xl">
+                                    <p className="flex text-purple text-sm md:text-xs lg:text-xl">
                                         Github
                                     </p>
                                     <FaLocationArrow
@@ -119,7 +119,7 @@ const RecentProjects = () => {
                                     href={item.link}
                                     className="flex items-center justify-center"
                                 >
-                                    <p className="text-purple flex text-sm md:text-xs lg:text-xl">
+                                    <p className="flex text-purple text-sm md:text-xs lg:text-xl">
                                         Live
                                     </p>
                                     <FaLocationArrow

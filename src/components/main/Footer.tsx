@@ -1,11 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import {
+    RxDiscordLogo,
     RxGithubLogo,
     RxInstagramLogo,
-    RxTwitterLogo,
     RxLinkedinLogo,
-    RxDiscordLogo,
+    RxTwitterLogo,
 } from "react-icons/rx";
 
 const Footer = () => {
@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                     <div>
-                        <h2 className="mb-4 text-2xl font-bold">About Us</h2>
+                        <h2 className="mb-4 font-bold text-2xl">About Us</h2>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Sed do eiusmod tempor incididunt ut labore et
@@ -22,12 +22,12 @@ const Footer = () => {
                         </p>
                     </div>
                     <div>
-                        <h2 className="mb-4 text-2xl font-bold">Contact</h2>
+                        <h2 className="mb-4 font-bold text-2xl">Contact</h2>
                         <p>Email: anshroshan813210@gmail.com</p>
                         <p>Phone: +91 xxx xxx 7742</p>
                     </div>
                     <div>
-                        <h2 className="z-100 mb-4 text-2xl font-bold">
+                        <h2 className="z-100 mb-4 font-bold text-2xl">
                             Follow Us
                         </h2>
                         <div className="flex space-x-4">
@@ -65,7 +65,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className="mt-8 border-t border-gray-600 pt-4 text-center">
+            <div className="mt-8 border-gray-600 border-t pt-4 text-center">
                 <p>&copy; 2024 Ansh Roshan. All Rights Reserved.</p>
             </div>
         </footer>

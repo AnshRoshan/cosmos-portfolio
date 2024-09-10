@@ -1,4 +1,4 @@
 function SiteHeader() {
-  return <div>SiteHeader</div>
+    return <div>SiteHeader</div>;
 }
-export default SiteHeader
+export default SiteHeader;

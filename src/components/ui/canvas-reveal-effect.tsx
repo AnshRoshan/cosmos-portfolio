@@ -260,8 +260,8 @@ const ShaderMaterial = ({
             }
         }
 
-        preparedUniforms["u_time"] = { value: 0, type: "1f" };
-        preparedUniforms["u_resolution"] = {
+        preparedUniforms.u_time = { value: 0, type: "1f" };
+        preparedUniforms.u_resolution = {
             value: new THREE.Vector2(size.width * 2, size.height * 2),
         }; // Initialize u_resolution
         return preparedUniforms;
@@ -304,7 +304,7 @@ const ShaderMaterial = ({
 
 const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
     return (
-        <Canvas className="absolute inset-0  h-full w-full">
+        <Canvas className="absolute inset-0 h-full w-full">
             <ShaderMaterial
                 source={source}
                 uniforms={uniforms}

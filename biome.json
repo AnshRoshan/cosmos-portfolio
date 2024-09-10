@@ -1,0 +1,76 @@
+{
+    "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+    "files": {
+        "ignore": [
+            ".next",
+            "out",
+            "node_modules",
+            ".velite",
+            ".velite-cache",
+            ".vscode",
+            "public",
+            "content",
+            "src/data",
+            "src/fonts",
+            "src/styles",
+            "src/utils",
+            "src/components/ui"
+        ],
+        "include": ["**/*.{ts,tsx,js,jsx,json,css,scss,md,yml,yaml}"]
+    },
+    "formatter": {
+        "enabled": true,
+        "formatWithErrors": false,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineEnding": "lf",
+        "lineWidth": 80,
+        "attributePosition": "auto"
+    },
+    "organizeImports": { "enabled": true },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": false,
+            "a11y": {
+                "noBlankTarget": { "level": "warn", "fix": "safe" },
+                "useButtonType": "warn"
+            },
+            "nursery": {
+                "useSortedClasses": {
+                    "level": "warn",
+                    "fix": "unsafe",
+                    "options": {
+                        "attributes": [
+                            "class",
+                            "className",
+                            "class",
+                            "className",
+                            "class",
+                            "className"
+                        ]
+                    }
+                }
+            },
+            "style": {
+                "useSelfClosingElements": {
+                    "level": "warn",
+                    "fix": "safe"
+                }
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "jsxQuoteStyle": "double",
+            "quoteProperties": "asNeeded",
+            "trailingCommas": "es5",
+            "semicolons": "always",
+            "arrowParentheses": "always",
+            "bracketSpacing": true,
+            "bracketSameLine": false,
+            "quoteStyle": "double",
+            "attributePosition": "auto"
+        }
+    }
+}

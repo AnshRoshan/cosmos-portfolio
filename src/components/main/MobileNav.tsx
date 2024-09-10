@@ -3,7 +3,7 @@
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
-import Link, { LinkProps } from "next/link";
+import Link, { type LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button, buttonVariants } from "../ui/button";

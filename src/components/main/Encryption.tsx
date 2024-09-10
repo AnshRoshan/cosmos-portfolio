@@ -46,7 +46,7 @@ const Encryption = () => {
                 <div className="absolute top-0 z-[5] h-auto w-auto">
                     <motion.div
                         variants={slideInFromTop}
-                        className="text-center text-[40px] font-medium text-gray-200"
+                        className="text-center font-medium text-[40px] text-gray-200"
                     >
                         Connect with me.
                         <span className="bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text text-transparent">
@@ -75,7 +75,7 @@ const Encryption = () => {
                             name="email"
                             id="email"
                             placeholder="Email"
-                            className="rounded-full  border-2 bg-black/40  p-1 text-center"
+                            className="rounded-full border-2 bg-black/40 p-1 text-center"
                         />
                         <input
                             type="text"
@@ -88,9 +88,12 @@ const Encryption = () => {
                             name="message"
                             id="message"
                             placeholder="Message"
-                            className="h-36 rounded-md border-2 bg-black/40   p-2 text-justify"
-                        ></textarea>
-                        <button className="group flex h-auto w-auto cursor-pointer flex-col items-center rounded-full p-2">
+                            className="h-36 rounded-md border-2 bg-black/40 p-2 text-justify"
+                        />
+                        <button
+                            type="button"
+                            className="group flex h-auto w-auto cursor-pointer flex-col items-center rounded-full p-2"
+                        >
                             <Image
                                 src="/LockTop.png"
                                 alt="Lock top"

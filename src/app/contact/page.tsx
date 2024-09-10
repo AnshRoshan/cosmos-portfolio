@@ -8,9 +8,9 @@ const ContactPage = () => {
     return (
         <div className="relative isolate bg-gray-900">
             <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-                <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
+                <div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:px-8 lg:py-48">
                     <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-                        <div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden ring-1 ring-white/5 lg:w-1/2">
+                        <div className="-z-10 absolute inset-y-0 left-0 w-full overflow-hidden ring-1 ring-white/5 lg:w-1/2">
                             <svg
                                 className="absolute inset-0 h-full w-full stroke-gray-700 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
                                 aria-hidden="true"
@@ -35,6 +35,7 @@ const ContactPage = () => {
                                     y={-1}
                                     className="overflow-visible fill-gray-800/20"
                                 >
+                                    <title>logo</title>
                                     <path
                                         d="M-470.5 0h201v201h-201Z"
                                         strokeWidth={0}
@@ -48,7 +49,7 @@ const ContactPage = () => {
                                 />
                             </svg>
                             <div
-                                className="absolute -left-56 top-[calc(100%-13rem)] transform-gpu blur-3xl lg:left-[max(-14rem,calc(100%-59rem))] lg:top-[calc(50%-7rem)]"
+                                className="-left-56 absolute top-[calc(100%-13rem)] transform-gpu bg-red-500 blur-3xl lg:top-[calc(50%-7rem)] lg:left-[max(-14rem,calc(100%-59rem))]"
                                 aria-hidden="true"
                             >
                                 <div
@@ -60,16 +61,16 @@ const ContactPage = () => {
                                 />
                             </div>
                         </div>
-                        <h2 className="text-3xl font-bold tracking-tight text-white">
+                        <h2 className="font-bold text-3xl text-white tracking-tight">
                             Get in touch
                         </h2>
-                        <p className="mt-6 text-lg leading-8 text-gray-300">
+                        <p className="mt-6 text-gray-300 text-lg leading-8">
                             Proin volutpat consequat porttitor cras nullam
                             gravida at. Orci molestie a eu arcu. Sed ut
                             tincidunt integer elementum id sem. Arcu sed
                             malesuada et magna.
                         </p>
-                        <dl className="mt-10 space-y-4 text-base leading-7 text-gray-300">
+                        <dl className="mt-10 space-y-4 text-base text-gray-300 leading-7">
                             <div className="flex gap-x-4">
                                 <dt className="flex-none">
                                     <span className="sr-only">Address</span>
@@ -122,16 +123,16 @@ const ContactPage = () => {
                     </div>
                 </div>
                 <form
-                    action="#"
-                    method="POST"
-                    className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48"
+                    method="post"
+                    action="https://rake.red/api/anshroshan/me"
+                    className="px-6 pt-20 pb-24 sm:pb-32 lg:px-8 lg:py-48"
                 >
                     <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
                         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                             <div>
                                 <label
                                     htmlFor="first-name"
-                                    className="block text-sm font-semibold leading-6 text-white"
+                                    className="block font-semibold text-sm text-white leading-6"
                                 >
                                     First name
                                 </label>
@@ -141,14 +142,14 @@ const ContactPage = () => {
                                         name="first-name"
                                         id="first-name"
                                         autoComplete="given-name"
-                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-white/10 ring-inset focus:ring-2 focus:ring-indigo-500 focus:ring-inset sm:text-sm sm:leading-6"
                                     />
                                 </div>
                             </div>
                             <div>
                                 <label
                                     htmlFor="last-name"
-                                    className="block text-sm font-semibold leading-6 text-white"
+                                    className="block font-semibold text-sm text-white leading-6"
                                 >
                                     Last name
                                 </label>
@@ -158,14 +159,14 @@ const ContactPage = () => {
                                         name="last-name"
                                         id="last-name"
                                         autoComplete="family-name"
-                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-white/10 ring-inset focus:ring-2 focus:ring-indigo-500 focus:ring-inset sm:text-sm sm:leading-6"
                                     />
                                 </div>
                             </div>
                             <div className="sm:col-span-2">
                                 <label
                                     htmlFor="email"
-                                    className="block text-sm font-semibold leading-6 text-white"
+                                    className="block font-semibold text-sm text-white leading-6"
                                 >
                                     Email
                                 </label>
@@ -175,14 +176,31 @@ const ContactPage = () => {
                                         name="email"
                                         id="email"
                                         autoComplete="email"
-                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-white/10 ring-inset focus:ring-2 focus:ring-indigo-500 focus:ring-inset sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+                            <div className="sm:col-span-2">
+                                <label
+                                    htmlFor="company"
+                                    className="block font-semibold text-sm text-white leading-6"
+                                >
+                                    company
+                                </label>
+                                <div className="mt-2.5">
+                                    <input
+                                        type="text"
+                                        name="company"
+                                        id="company"
+                                        autoComplete="company"
+                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-white/10 ring-inset focus:ring-2 focus:ring-indigo-500 focus:ring-inset sm:text-sm sm:leading-6"
                                     />
                                 </div>
                             </div>
                             <div className="sm:col-span-2">
                                 <label
                                     htmlFor="phone-number"
-                                    className="block text-sm font-semibold leading-6 text-white"
+                                    className="block font-semibold text-sm text-white leading-6"
                                 >
                                     Phone number
                                 </label>
@@ -192,14 +210,14 @@ const ContactPage = () => {
                                         name="phone-number"
                                         id="phone-number"
                                         autoComplete="tel"
-                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-white/10 ring-inset focus:ring-2 focus:ring-indigo-500 focus:ring-inset sm:text-sm sm:leading-6"
                                     />
                                 </div>
                             </div>
                             <div className="sm:col-span-2">
                                 <label
                                     htmlFor="message"
-                                    className="block text-sm font-semibold leading-6 text-white"
+                                    className="block font-semibold text-sm text-white leading-6"
                                 >
                                     Message
                                 </label>
@@ -208,8 +226,28 @@ const ContactPage = () => {
                                         name="message"
                                         id="message"
                                         rows={4}
-                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-white/10 ring-inset focus:ring-2 focus:ring-indigo-500 focus:ring-inset sm:text-sm sm:leading-6"
                                         defaultValue={""}
+                                    />
+                                </div>
+                            </div>
+                            <div
+                                className="sm:col-span-2"
+                                style={{ display: "none" }}
+                            >
+                                <label
+                                    htmlFor="honeypot"
+                                    className="block font-semibold text-sm text-white leading-6"
+                                >
+                                    Leave this field empty
+                                </label>
+                                <div className="mt-2.5">
+                                    <input
+                                        type="text"
+                                        name="honeypot"
+                                        id="honeypot"
+                                        autoComplete="off"
+                                        className="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-white/10 ring-inset focus:ring-2 focus:ring-indigo-500 focus:ring-inset sm:text-sm sm:leading-6"
                                     />
                                 </div>
                             </div>
@@ -217,7 +255,7 @@ const ContactPage = () => {
                         <div className="mt-8 flex justify-end">
                             <button
                                 type="submit"
-                                className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-center font-semibold text-sm text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-500 focus-visible:outline-offset-2"
                             >
                                 Send message
                             </button>

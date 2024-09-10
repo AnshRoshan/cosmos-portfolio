@@ -1,7 +1,7 @@
 import {
     Backend_skill,
-    Frontend_skill,
     DevOps,
+    Frontend_skill,
     Other_skill,
 } from "@/constants";
 import React from "react";
@@ -16,11 +16,11 @@ const Skills = () => {
             style={{ transform: "scale(0.9" }}
         >
             <SkillText />
-            <div className="  bg-gradient-radial from-white/5 to-transparent p-4 ">
+            <div className=" bg-gradient-radial from-white/5 to-transparent p-4 ">
                 <div className="mt-4 flex flex-row flex-wrap items-center justify-around gap-5">
                     {DevOps.map((image, index) => (
                         <SkillDataProvider
-                            key={index}
+                            key={`${index}-${image}`}
                             src={image.Image}
                             width={image.width}
                             height={image.height}
@@ -31,7 +31,7 @@ const Skills = () => {
                 <div className="mt-4 flex flex-row flex-wrap items-center justify-around gap-5">
                     {Frontend_skill.map((image, index) => (
                         <SkillDataProvider
-                            key={index}
+                            key={`${index}-${image}`}
                             src={image.Image}
                             width={image.width}
                             height={image.height}
@@ -42,7 +42,7 @@ const Skills = () => {
                 <div className="mt-4 flex flex-row flex-wrap items-center justify-around gap-5">
                     {Backend_skill.map((image, index) => (
                         <SkillDataProvider
-                            key={index}
+                            key={`${index}-${image}`}
                             src={image.Image}
                             width={image.width}
                             height={image.height}
@@ -53,7 +53,7 @@ const Skills = () => {
                 <div className="mt-4 flex flex-row flex-wrap items-center justify-center gap-5">
                     {Other_skill.map((image, index) => (
                         <SkillDataProvider
-                            key={index}
+                            key={`${index}-${image}`}
                             src={image.Image}
                             width={image.width}
                             height={image.height}

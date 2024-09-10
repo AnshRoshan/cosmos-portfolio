@@ -31,7 +31,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${inter.className} flex h-dvh w-dvw flex-col overflow-x-hidden overflow-y-scroll  text-black dark:bg-[#040115]  dark:text-white `}
+                className={`${inter.className} flex h-dvh w-dvw flex-col overflow-x-hidden overflow-y-scroll text-black dark:bg-[#040115] dark:text-white `}
             >
                 <ThemeProvider attribute="class" defaultTheme="system">
                     <StarsCanvas />

@@ -1,72 +1,78 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { motion } from 'framer-motion'
-import { slideInFromLeft, slideInFromRight, slideInFromTop } from '@/utils/motion'
-import { SparklesIcon } from '@heroicons/react/24/solid'
-import Image from 'next/image'
+import {
+    slideInFromLeft,
+    slideInFromRight,
+    slideInFromTop,
+} from "@/utils/motion";
+import { SparklesIcon } from "@heroicons/react/24/solid";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import React from "react";
 
 function About() {
-  return (
-    // <div>
-    <motion.div
-      initial='hidden'
-      animate='visible'
-      className='flex flex-col lg:flex-row items-center justify-between gap-24 px-20 mt-24 w-full z-[20]'
-    >
-      <div className='h-full w-full flex flex-col gap-5 justify-center m-auto text-start'>
+    return (
+        // <div>
         <motion.div
-          variants={slideInFromTop}
-          className='Welcome-box p-2 border border-[#7042f88b] opacity-[0.9]'
+            initial="hidden"
+            animate="visible"
+            className="z-[20] mt-24 flex w-full flex-col items-center justify-between gap-24 px-20 lg:flex-row"
         >
-          <SparklesIcon className='text-[#b49bff] mr-[10px] h-8 w-8' />
-          <h1 className='Welcome-text text-lg tracking-wider flex flex-col md:flex-row py-2'>
-            <span> - Fullstack Developer </span>
-            <span> - DevOps Engineer </span>
-            <span> - Electrical Engineer</span>
-          </h1>
-        </motion.div>
+            <div className="m-auto flex h-full w-full flex-col justify-center gap-5 text-start">
+                <motion.div
+                    variants={slideInFromTop}
+                    className="Welcome-box border border-[#7042f88b] p-2 opacity-[0.9]"
+                >
+                    <SparklesIcon className="mr-[10px] h-8 w-8 text-[#b49bff]" />
+                    <h1 className="Welcome-text flex flex-col py-2 text-lg tracking-wider md:flex-row">
+                        <span> - Fullstack Developer </span>
+                        <span> - DevOps Engineer </span>
+                        <span> - Electrical Engineer</span>
+                    </h1>
+                </motion.div>
 
-        <motion.div
-          variants={slideInFromLeft(0.5)}
-          className='flex flex-col gap-6 mt-6 text-6xl font-bold text-white max-w-[600px] w-auto h-auto'
-        >
-          <span>
-            Hi I&apos;m{' '}
-            <span className='text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500'>
-              Ansh Roshan
-            </span>
-          </span>
-          <span>Wecome To My </span>
-          <span className='text-transparent bg-clip-text bg-gradient-to-r to-violet-500 from-orange-500'>
-            Portfolio Website
-          </span>
-        </motion.div>
+                <motion.div
+                    variants={slideInFromLeft(0.5)}
+                    className="mt-6 flex h-auto w-auto max-w-[600px] flex-col gap-6 font-bold text-6xl text-white"
+                >
+                    <span>
+                        Hi I&apos;m{" "}
+                        <span className="bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text text-transparent">
+                            Ansh Roshan
+                        </span>
+                    </span>
+                    <span>Wecome To My </span>
+                    <span className="bg-gradient-to-r from-orange-500 to-violet-500 bg-clip-text text-transparent">
+                        Portfolio Website
+                    </span>
+                </motion.div>
 
-        <motion.p
-          variants={slideInFromLeft(0.8)}
-          className='text-lg text-gray-400 my-5 max-w-[600px]'
-        >
-          I&apos;m a Full Stack Software Engineer with experience in Website, Mobile, and Software
-          development and dedicated DevOps Engineer, skilled in software development tools, Linux,
-          git, Kubernetes, AWS, and a seasoned Web Developer in MERN Stack, Next.js.Check out my
-          Resume below!
-        </motion.p>
-        <motion.a
-          variants={slideInFromLeft(1)}
-          className='py-2 button-primary text-center text-xl text-white cursor-pointer rounded-full max-w-[200px]'
-        >
-          Resume
-        </motion.a>
-      </div>
-      <Image
-        src='/main.png'
-        alt='work icons'
-        height={700}
-        width={800}
-        className='object-contain rounded-full m-8 mx-auto p-8 border-2  shadow-slate-600 filter shadow-lg'
-      />
-      {/* <motion.div
+                <motion.p
+                    variants={slideInFromLeft(0.8)}
+                    className="my-5 max-w-[600px] text-gray-400 text-lg"
+                >
+                    I&apos;m a Full Stack Software Engineer with experience in
+                    Website, Mobile, and Software development and dedicated
+                    DevOps Engineer, skilled in software development tools,
+                    Linux, git, Kubernetes, AWS, and a seasoned Web Developer in
+                    MERN Stack, Next.js.Check out my Resume below!
+                </motion.p>
+                <motion.a
+                    variants={slideInFromLeft(1)}
+                    className="button-primary max-w-[200px] cursor-pointer rounded-full py-2 text-center text-white text-xl"
+                    href="/Ansh_Roshan_Resume.pdf"
+                >
+                    Resume
+                </motion.a>
+            </div>
+            <Image
+                src="/main.png"
+                alt="work icons"
+                height={700}
+                width={800}
+                className="m-8 mx-auto rounded-full border-2 object-contain p-8 shadow-lg shadow-slate-600 filter"
+            />
+            {/* <motion.div
           variants={slideInFromRight(0.8)}
           className='w-full h-full flex justify-evenly items-center '
         >
@@ -78,8 +84,8 @@ function About() {
             className='object-contain'
           />
         </motion.div> */}
-    </motion.div>
-    // </div>
-  )
+        </motion.div>
+        // </div>
+    );
 }
-export default About
+export default About;

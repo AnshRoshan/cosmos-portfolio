@@ -1,10 +1,10 @@
-import { posts } from "#site/content";
 import { MDXContent } from "@/components/main/mdx-components";
 import { notFound } from "next/navigation";
+import { posts } from "#site/content";
 import "./style.css";
-import { Metadata } from "next";
-import { siteConfig } from "@/config/site";
 import { Tag } from "@/components/sub/Tag";
+import { siteConfig } from "@/config/site";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 interface PostPageProps {
@@ -72,7 +72,7 @@ export default async function PostPage({ params }: PostPageProps) {
     }
 
     return (
-        <article className="container prose mx-auto max-w-7xl py-6 dark:prose-invert">
+        <article className="prose dark:prose-invert container mx-auto max-w-7xl py-6">
             <h1 className="mb-4 text-5xl leading-normal">{post.title}</h1>
             {post.description ? (
                 <p className="mt-0 text-lg text-muted-foreground">
@@ -80,7 +80,9 @@ export default async function PostPage({ params }: PostPageProps) {
                 </p>
             ) : null}
             <div className="mb-2 flex gap-2">
-                {post.tags?.map((tag) => <Tag tag={tag} key={tag} />)}
+                {post.tags?.map((tag) => (
+                    <Tag tag={tag} key={tag} />
+                ))}
             </div>
             <hr className="my-4" />
             <MDXContent code={post.body} />

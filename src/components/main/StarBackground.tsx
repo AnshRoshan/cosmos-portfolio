@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useRef, Suspense } from "react";
+import { PointMaterial, Points, Preload } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial, Preload } from "@react-three/drei";
 // @ts-ignore
 import * as random from "maath/random/dist/maath-random.esm";
+import React, { useState, useRef, Suspense } from "react";
 
 const StarBackground = (props: any) => {
     const ref: any = useRef();
@@ -13,8 +13,10 @@ const StarBackground = (props: any) => {
     );
 
     useFrame((state, delta) => {
-        ref.current.rotation.x -= delta / 10;
-        ref.current.rotation.y -= delta / 15;
+        if (ref) {
+            ref.current.rotation.x -= delta / 10;
+            ref.current.rotation.y -= delta / 15;
+        }
     });
 
     return (
@@ -39,7 +41,7 @@ const StarBackground = (props: any) => {
 };
 
 const StarsCanvas = () => (
-    <div className="fixed inset-0 -z-10 h-auto w-full">
+    <div className="-z-10 fixed inset-0 h-auto w-full">
         <Canvas camera={{ position: [0, 0, 1] }}>
             <Suspense fallback={null}>
                 <StarBackground />

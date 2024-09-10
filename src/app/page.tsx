@@ -1,7 +1,7 @@
+import Encryption from "@/components/main/Encryption";
 import Hero from "@/components/main/Hero";
 import Projects from "@/components/main/Projects";
 import Skills from "@/components/main/Skills";
-import Encryption from "@/components/main/Encryption";
 export default function Home() {
     return (
         <main className="h-full w-full">
@@ -9,7 +9,6 @@ export default function Home() {
                 <Hero />
                 <Skills />
                 <Projects />
-                <Encryption />
             </div>
         </main>
     );

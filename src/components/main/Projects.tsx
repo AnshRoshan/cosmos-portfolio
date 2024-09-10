@@ -1,7 +1,7 @@
+import Link from "next/link";
 import React from "react";
 import ProjectCard from "../sub/ProjectCard";
 import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
-import Link from "next/link";
 
 const Projects_db = [
     {
@@ -46,7 +46,7 @@ const Projects = () => {
     return (
         <div className="mb-20 flex flex-col items-center justify-center">
             <div
-                className="mb-20 bg-gradient-to-r  from-purple-500  to-cyan-500 bg-clip-text text-7xl font-bold text-transparent "
+                className="mb-20 bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text font-bold text-7xl text-transparent "
                 id="projects"
             >
                 Projects
@@ -70,7 +70,7 @@ const Projects = () => {
                 {Projects_db.map((project, index) => {
                     return (
                         <BentoGridItem
-                            key={index}
+                            key={project.title}
                             title={project.title}
                             description={project.description}
                             icon={
