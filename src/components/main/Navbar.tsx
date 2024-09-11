@@ -1,17 +1,17 @@
 "use client";
-import { SiteConfig, siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
 import { ModeToggle } from "../sub/Mode-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Button, buttonVariants } from "../ui/button";
+import { buttonVariants } from "../ui/button";
 import { MobileNav } from "./MobileNav";
+import NavItems from "./NavItems";
+import { MovingBorder } from "../ui/moving-border";
 
 const Navbar = () => {
-    const pathname = usePathname();
     const Socials = [
         {
             name: "Instagram",
@@ -30,24 +30,6 @@ const Navbar = () => {
         },
     ];
 
-    const navitems = [
-        {
-            name: "About",
-            link: "/about",
-        },
-        {
-            name: "Projects",
-            link: "/projects",
-        },
-        {
-            name: "Blogs",
-            link: "/blog",
-        },
-        {
-            name: "Contact",
-            link: "/contact",
-        },
-    ];
     return (
         <div className="top-0 z-50 h-[65px] w-full bg-[#03001417] px-10 py-2 shadow-[#2A0E61]/50 shadow-lg backdrop-blur-md">
             <div className="m-auto flex h-full w-full flex-row items-center justify-between px-[10px]">
@@ -58,22 +40,7 @@ const Navbar = () => {
                     </Avatar>
                 </Link>
                 <div className="hidden h-full w-full flex-row items-center justify-between md:mr-20 md:w-1/2 lg:flex">
-                    <div className="mr-[15px] flex h-auto w-full items-center justify-between rounded-full border border-[#7042f861] px-[20px] py-[10px] text-gray-200">
-                        {navitems.map((item) => (
-                            <Link
-                                href={item.link}
-                                key={item.name}
-                                className={cn(
-                                    "font-medium transition-colors hover:text-primary",
-                                    pathname === item.link
-                                        ? "text-primary"
-                                        : "text-primary/30"
-                                )}
-                            >
-                                <p>{item.name}</p>
-                            </Link>
-                        ))}
-                    </div>
+                    <NavItems />
                 </div>
                 <div className="flex w-fit gap-5 md:flex">
                     {Socials.map((social) => (

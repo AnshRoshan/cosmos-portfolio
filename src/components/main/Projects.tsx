@@ -44,10 +44,9 @@ const Projects_db = [
 
 const Projects = () => {
     return (
-        <div className="mb-20 flex flex-col items-center justify-center">
+        <div className="mb-20 flex flex-col items-center justify-center bg-black/20 dark:bg-white/10 w-fit mx-auto p-20 rounded-3xl">
             <div
-                className="mb-20 bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text font-bold text-7xl text-transparent "
-                id="projects"
+                className="pb-16 underline underline-offset-4  bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text font-extrabold text-7xl text-transparent "
             >
                 Projects
             </div>

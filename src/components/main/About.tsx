@@ -16,7 +16,7 @@ function About() {
         <motion.div
             initial="hidden"
             animate="visible"
-            className="z-[20] mt-24 flex w-full flex-col items-center justify-between gap-24 px-20 lg:flex-row"
+            className="z-[20] mt-24 flex w-full flex-col items-center justify-between gap-24 px-20 lg:flex-row dark:bg-white/40"
         >
             <div className="m-auto flex h-full w-full flex-col justify-center gap-5 text-start">
                 <motion.div
@@ -72,20 +72,8 @@ function About() {
                 width={800}
                 className="m-8 mx-auto rounded-full border-2 object-contain p-8 shadow-lg shadow-slate-600 filter"
             />
-            {/* <motion.div
-          variants={slideInFromRight(0.8)}
-          className='w-full h-full flex justify-evenly items-center '
-        >
-          <Image
-            src='/mainIconsdark.svg'
-            alt='work icons'
-            height={500}
-            width={400}
-            className='object-contain'
-          />
-        </motion.div> */}
+
         </motion.div>
-        // </div>
     );
 }
 export default About;

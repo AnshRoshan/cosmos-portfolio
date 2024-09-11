@@ -4,20 +4,16 @@ import { slideInFromLeft, slideInFromRight } from "@/utils/motion";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FlipWords } from "../ui/flip-words";
-import { Spotlight } from "../ui/spotlight";
 
 const HeroContent = () => {
     return (
         <motion.div
             initial="hidden"
             animate="visible"
-            className="z-[20] flex w-full flex-col items-center justify-between gap-24 px-20 py-40 lg:flex-row"
+            className="z-[20] flex   flex-col items-center justify-between gap-24 px-20 py-40 lg:flex-row"
         >
-            <div className="m-auto flex w-full flex-col justify-center gap-5 text-start">
-                <Spotlight
-                    className="-top-60 md:-top-40 left-0 "
-                    fill="white"
-                />
+            <div className="m-auto flex  flex-col justify-center gap-5 text-start">
+
                 <motion.div
                     variants={slideInFromLeft(0.5)}
                     className="mt-6 flex h-auto w-auto max-w-[600px] flex-col gap-6 font-bold text-6xl "

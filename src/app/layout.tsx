@@ -29,11 +29,11 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <body
                 className={`${inter.className} flex h-dvh w-dvw flex-col overflow-x-hidden overflow-y-scroll text-black dark:bg-[#040115] dark:text-white `}
             >
-                <ThemeProvider attribute="class" defaultTheme="system">
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                     <StarsCanvas />
                     <Navbar />
                     <main className="flex-grow">{children}</main>
