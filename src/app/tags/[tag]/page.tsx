@@ -1,7 +1,7 @@
 import { Tag } from "@/components/sub/Tag";
 import { PostItem } from "@/components/sub/post-item";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAllTags, getPostsByTagSlug, sortTagsByCount } from "@/lib/utils";
+import { getAllTags, getPostsByTagSlug, sortTagsByCount } from "@/lib/blogUtil";
 import { slug } from "github-slugger";
 import type { Metadata } from "next";
 import { posts } from "#site/content";

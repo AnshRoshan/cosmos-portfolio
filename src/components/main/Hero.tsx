@@ -1,3 +1,5 @@
+'use client';
+
 import { useTheme } from 'next-themes';
 import HeroContent from '../sub/HeroContent';
 import { Spotlight } from '../ui/spotlight';

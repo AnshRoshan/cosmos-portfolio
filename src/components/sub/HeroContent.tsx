@@ -10,13 +10,13 @@ const HeroContent = () => {
         <motion.div
             initial="hidden"
             animate="visible"
-            className="z-[20] flex   flex-col items-center justify-between gap-24 px-20 py-40 lg:flex-row"
+            className="z-20 flex  h-fit flex-col items-center justify-between gap-20 lg:flex-row"
         >
             <div className="m-auto flex  flex-col justify-center gap-5 text-start">
 
                 <motion.div
                     variants={slideInFromLeft(0.5)}
-                    className="mt-6 flex h-auto w-auto max-w-[600px] flex-col gap-6 font-bold text-6xl "
+                    className="mt-6 flex h-fit w-auto max-w-[600px] flex-col gap-6 font-bold text-6xl "
                 >
                     <span>
                         Hi I&apos;m{" "}
@@ -33,7 +33,7 @@ const HeroContent = () => {
             </div>
             <Image
                 src="/main.png"
-                alt="work icons"
+                alt="profile"
                 height={700}
                 width={700}
                 className="h-[36rem] w-[36rem] rounded-full border-2 bg-slate-300 object-contain p-8 shadow-inner shadow-slate-600 filter dark:bg-transparent"

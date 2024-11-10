@@ -1,4 +1,5 @@
-import { cn, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/blogUtil";
+import { cn } from "@/lib/utils";
 import { Calendar } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";

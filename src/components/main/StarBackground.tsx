@@ -55,7 +55,7 @@ const StarsCanvas = () => {
     }
 
     return (
-        <div className={`fixed inset-0 h-auto w-full ${theme === 'dark' ? 'bg-transparent' : 'bg-[#45ff98]/20'}`}>
+        <div className={`fixed inset-0 h-auto w-full -z-10 ${theme === 'dark' ? 'bg-transparent' : 'bg-[#45ff98]/20'}`}>
             <Canvas camera={{ position: [0, 0, 1] }}>
                 <Suspense fallback={null}>
                     <StarBackground />

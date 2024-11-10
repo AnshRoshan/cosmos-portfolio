@@ -1,5 +1,5 @@
 import { Tag } from "@/components/sub/Tag";
-import { getAllTags, sortTagsByCount } from "@/lib/utils";
+import { getAllTags, sortTagsByCount } from "@/lib/blogUtil";
 import type { Metadata } from "next";
 import { posts } from "#site/content";
 

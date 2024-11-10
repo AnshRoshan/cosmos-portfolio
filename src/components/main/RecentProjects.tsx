@@ -88,7 +88,7 @@ const RecentProjects = () => {
                                     {item.iconLists.map((icon, index) => (
                                         <div
                                             key={`${index}-${icon}`}
-                                            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/[.2] bg-black lg:h-10 lg:w-10"
+                                            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/[.2] bg-neutral-900 dark:bg-neutral-400 lg:h-10 lg:w-10"
                                             style={{
                                                 transform: `translateX(-${5 * index + 2}px)`,
                                             }}
