@@ -1,2 +1,7 @@
 ignoredBuiltDependencies:
   - '@sentry/cli'
+  - esbuild
+
+onlyBuiltDependencies:
+  - '@biomejs/biome'
+  - sharp
