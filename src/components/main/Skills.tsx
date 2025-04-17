@@ -63,7 +63,7 @@ const Skills = () => {
             </div>
             <div className="absolute h-full w-full">
                 <div className="absolute z-[-10] flex h-full w-full items-center justify-center bg-cover opacity-60">
-                    <video
+                    {/* <video
                         className="hidden h-auto w-full dark:block"
                         preload="false"
                         playsInline
@@ -71,7 +71,7 @@ const Skills = () => {
                         muted
                         autoPlay
                         src="/cards-video.webm"
-                    />
+                    /> */}
                 </div>
             </div>
         </section>

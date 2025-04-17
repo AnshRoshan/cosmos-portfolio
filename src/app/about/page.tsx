@@ -18,14 +18,12 @@ function about() {
             <div className="m-auto flex h-full max-w-7xl flex-col justify-center gap-5 text-start">
                 <motion.div
                     variants={slideInFromTop}
-                    className="after:-z-10 relative mt-8 inline-flex h-fit w-fit cursor-pointer rounded-full border border-blue-400/60 bg-blue-400/10 px-4 py-2 text-blue-700 text-xl opacity-0 outline-none ring-cyan-700 transition-colors after:absolute after:inset-0 after:animate-pulse after:rounded-full after:bg-cyan-500 after:bg-opacity-0 after:blur-md after:transition-all after:duration-500 hover:border-cyan-800/60 hover:text-cyan-800 after:hover:bg-opacity-15 focus:ring-2 "
+                    className="after:-z-10 relative mt-8 inline-flex h-fit w-fit cursor-pointer rounded-full border border-blue-100/20 bg-blue-200/10 px-4 py-2 text-blue-200 opacity-0 outline-none ring-yellow-300 transition-colors after:absolute after:inset-0 after:animate-pulse after:rounded-full after:bg-sky-100 after:bg-opacity-0 after:blur-md after:transition-all after:duration-500 hover:border-sky-200/40 hover:text-sky-300 after:hover:bg-opacity-15 focus:ring-2 font-bold"
                 >
                     <SparklesIcon className="mr-[10px] h-8 w-8 text-[#b49bff]" />
-                    <h1 className=" flex ">
-                        <span> - Fullstack Developer </span>
-                        <span> - DevOps Engineer </span>
-                        <span> - Electrical Engineer</span>
-                    </h1>
+                    <span> - Fullstack Developer </span>
+                    <span> - DevOps Engineer </span>
+                    <span> - Electrical Engineer</span>
                 </motion.div>
 
                 <motion.div

@@ -48,7 +48,7 @@ const ContactPage = () => {
                                 />
                             </svg>
                             <div
-                                className="-left-56 absolute top-[calc(100%-13rem)] transform-gpu bg-red-500 blur-3xl lg:top-[calc(50%-7rem)] lg:left-[max(-14rem,calc(100%-59rem))]"
+                                className="-left-56 absolute top-[calc(100%-13rem)] transform-gpu bg-sky-500/50 blur-3xl lg:top-[calc(50%-7rem)] lg:left-[max(-14rem,calc(100%-59rem))]"
                                 aria-hidden="true"
                             >
                                 <div

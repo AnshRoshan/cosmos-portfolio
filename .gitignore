@@ -40,3 +40,4 @@ next-env.d.ts
 .velite
 # Sentry Config File
 .env.sentry-build-plugin
+.qodo
