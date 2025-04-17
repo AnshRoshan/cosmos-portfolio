@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "workspaces": [],
+    "packageManager": "pnpm@10.8.0",
     "scripts": {
         "dev": "next dev",
         "build": "next build",
