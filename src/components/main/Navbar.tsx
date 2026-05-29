@@ -1,77 +1,74 @@
 "use client";
+
 import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ModeToggle } from "../sub/Mode-toggle";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { buttonVariants } from "../ui/button";
+import {
+    IconBrandGithub,
+    IconBrandLinkedin,
+    IconBrandX,
+} from "@tabler/icons-react";
 import { MobileNav } from "./MobileNav";
 import NavItems from "./NavItems";
-import { MovingBorder } from "../ui/moving-border";
+
+const socialLinks = [
+    {
+        name: "GitHub",
+        href: siteConfig.links.github,
+        icon: IconBrandGithub,
+    },
+    {
+        name: "LinkedIn",
+        href: siteConfig.links.linkedin,
+        icon: IconBrandLinkedin,
+    },
+    {
+        name: "X (Twitter)",
+        href: siteConfig.links.twitter,
+        icon: IconBrandX,
+    },
+];
 
 const Navbar = () => {
-    const Socials = [
-        {
-            name: "Instagram",
-            src: "/instagram.svg",
-            link: siteConfig.links.instagram,
-        },
-        {
-            name: "Facebook",
-            src: "/facebook.svg",
-            link: siteConfig.links.facebook,
-        },
-        {
-            name: "Discord",
-            src: "/discord.svg",
-            link: siteConfig.links.discord,
-        },
-    ];
-
     return (
-        <div className="top-0 z-50 h-[65px] w-full bg-[#03001417] px-10 py-2 shadow-[#2A0E61]/50 shadow-lg backdrop-blur-md">
-            <div className="m-auto flex h-full w-full flex-row items-center justify-between px-[10px]">
-                <Link href="/" className="h-auto flex-row items-center md:flex">
-                    <Avatar className="h-12 w-12 ">
-                        <AvatarImage src="/glaxy.png" alt="logo" />
-                        <AvatarFallback className="md:block">AR</AvatarFallback>
-                    </Avatar>
+        <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#040115]/70 backdrop-blur-xl">
+            <div className="mx-auto flex h-[68px] w-full max-w-[1400px] items-center justify-between px-6 md:px-10">
+
+                {/* Left: wordmark */}
+                <Link href="/" aria-label="Ansh Roshan - home">
+                    <span className="font-display text-lg font-semibold tracking-tight text-[#f4f4f7]">
+                        Ansh<span className="text-[#F5B544]">.</span>
+                    </span>
                 </Link>
-                <div className="hidden h-full w-full flex-row items-center justify-between md:mr-20 md:w-1/2 lg:flex">
+
+                {/* Center: nav links (desktop only) */}
+                <div className="hidden lg:flex">
                     <NavItems />
                 </div>
-                <div className="flex w-fit gap-5 md:flex">
-                    {Socials.map((social) => (
+
+                {/* Right: social icons + mobile menu */}
+                <div className="flex items-center gap-1">
+                    {socialLinks.map(({ name, href, icon: Icon }) => (
                         <Link
-                            href={social.link}
+                            key={name}
+                            href={href}
                             target="_blank"
-                            rel="norefferrer"
-                            key={social.name}
+                            rel="noreferrer"
+                            aria-label={name}
+                            className="p-2 rounded-full text-[#9a9aac] hover:text-[#f4f4f7] hover:bg-white/5 transition-colors"
                         >
-                            <div
-                                className={cn(
-                                    buttonVariants({ variant: "ghost" }),
-                                    "w-10 px-0"
-                                )}
-                            >
-                                <Image
-                                    src={social.src}
-                                    alt={social.name}
-                                    key={social.name}
-                                    width={24}
-                                    height={24}
-                                />
-                                <span className="sr-only">{social.name}</span>
-                            </div>
+                            <Icon size={20} strokeWidth={1.5} />
+                            <span className="sr-only">{name}</span>
                         </Link>
                     ))}
-                    <ModeToggle />
-                    <MobileNav />
+
+                    {/* Mobile hamburger (visible below lg) */}
+                    <div className="lg:hidden ml-1">
+                        <MobileNav />
+                    </div>
                 </div>
+
             </div>
-        </div>
+        </header>
     );
 };
 

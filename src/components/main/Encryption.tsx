@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Encryption = () => {
-    const form: any = useRef();
+    const form: any = useRef(null);
     const [hovered, setHovered] = React.useState(false);
 
     const sendEmail = (e: any) => {

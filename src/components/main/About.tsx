@@ -1,79 +1,46 @@
 "use client";
 
-import {
-    slideInFromLeft,
-    slideInFromRight,
-    slideInFromTop,
-} from "@/utils/motion";
-import { SparklesIcon } from "@heroicons/react/24/solid";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import React from "react";
+import FadeIn from "@/components/sub/FadeIn";
+import AnimatedText from "@/components/sub/AnimatedText";
+import PillButton from "@/components/sub/PillButton";
 
 function About() {
     return (
-        // <div>
-        <motion.div
-            initial="hidden"
-            animate="visible"
-            className="z-[20] mt-24 flex w-full flex-col items-center justify-between gap-24 px-20 lg:flex-row dark:bg-white/40"
-        >
-            <div className="m-auto flex h-full w-full flex-col justify-center gap-5 text-start">
-                <motion.div
-                    variants={slideInFromTop}
-                    className="Welcome-box border border-[#7042f88b] p-2 opacity-[0.9]"
-                >
-                    <SparklesIcon className="mr-[10px] h-8 w-8 text-[#b49bff]" />
-                    <h1 className="Welcome-text flex flex-col py-2 text-lg tracking-wider md:flex-row">
-                        <span> - Fullstack Developer </span>
-                        <span> - DevOps Engineer </span>
-                        <span> - Electrical Engineer</span>
-                    </h1>
-                </motion.div>
+        <section className="relative mx-auto w-full max-w-[1400px] px-6 py-24 md:px-10 md:py-32">
+            <div className="mx-auto max-w-3xl flex flex-col items-center text-center">
+                <FadeIn>
+                    <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight">
+                        About
+                    </h2>
+                </FadeIn>
 
-                <motion.div
-                    variants={slideInFromLeft(0.5)}
-                    className="mt-6 flex h-auto w-auto max-w-[600px] flex-col gap-6 font-bold text-6xl text-white"
-                >
-                    <span>
-                        Hi I&apos;m{" "}
-                        <span className="bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text text-transparent">
-                            Ansh Roshan
-                        </span>
-                    </span>
-                    <span>Wecome To My </span>
-                    <span className="bg-gradient-to-r from-orange-500 to-violet-500 bg-clip-text text-transparent">
-                        Portfolio Website
-                    </span>
-                </motion.div>
+                <div className="mt-10 md:mt-14">
+                    <AnimatedText
+                        text="I'm Ansh, a full-stack developer who turns rough ideas into shipped products. I care about clean interfaces, fast load times, and infrastructure that doesn't page me at 3am. Lately I work across React, Next.js, and the DevOps stack that keeps it all running."
+                        className="font-display text-2xl sm:text-3xl lg:text-[2.6rem] leading-[1.35] tracking-tight text-[#f4f4f7] max-w-[20ch] sm:max-w-[24ch] md:max-w-[34ch]"
+                    />
+                </div>
 
-                <motion.p
-                    variants={slideInFromLeft(0.8)}
-                    className="my-5 max-w-[600px] text-gray-400 text-lg"
-                >
-                    I&apos;m a Full Stack Software Engineer with experience in
-                    Website, Mobile, and Software development and dedicated
-                    DevOps Engineer, skilled in software development tools,
-                    Linux, git, Kubernetes, AWS, and a seasoned Web Developer in
-                    MERN Stack, Next.js.Check out my Resume below!
-                </motion.p>
-                <motion.a
-                    variants={slideInFromLeft(1)}
-                    className="button-primary max-w-[200px] cursor-pointer rounded-full py-2 text-center text-white text-xl"
-                    href="/Ansh_Roshan_Resume.pdf"
-                >
-                    Resume
-                </motion.a>
+                <FadeIn delay={0.2}>
+                    <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm uppercase tracking-[0.18em] text-[#9a9aac] mt-12">
+                        <span>Full-stack</span>
+                        <span className="hidden sm:block h-4 w-px bg-white/15 self-center" />
+                        <span>DevOps</span>
+                        <span className="hidden sm:block h-4 w-px bg-white/15 self-center" />
+                        <span>Product-minded</span>
+                    </div>
+                </FadeIn>
+
+                <FadeIn delay={0.3}>
+                    <div className="mt-12">
+                        <PillButton href="/about" variant="ghost">
+                            More about me
+                        </PillButton>
+                    </div>
+                </FadeIn>
             </div>
-            <Image
-                src="/main.png"
-                alt="work icons"
-                height={700}
-                width={800}
-                className="m-8 mx-auto rounded-full border-2 object-contain p-8 shadow-lg shadow-slate-600 filter"
-            />
-
-        </motion.div>
+        </section>
     );
 }
+
 export default About;

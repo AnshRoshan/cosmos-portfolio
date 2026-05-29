@@ -1,50 +1,36 @@
 'use client'
 
 import Link from "next/link";
-import { Button } from "../ui/moving-border";
-import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
+const navItems = [
+    { name: "About",    link: "/about"    },
+    { name: "Projects", link: "/projects" },
+    { name: "Blogs",    link: "/blog"     },
+    { name: "Contact",  link: "/contact"  },
+];
+
 const NavItems = () => {
-        const pathname = usePathname();
-        const navitems = [
-        {
-            name: "About",
-            link: "/about",
-        },
-        {
-            name: "Projects",
-            link: "/projects",
-        },
-        {
-            name: "Blogs",
-            link: "/blog",
-        },
-        {
-            name: "Contact",
-            link: "/contact",
-        },
-    ];
+    const pathname = usePathname();
+
     return (
-            <div className="mr-4 flex h-auto w-full items-center justify-between rounded-full border border-[#7042f861] px-[20px] py-[10px] text-gray-200">
-
-                {navitems.map((item) => (
-                    <Link
-                    href={item.link}
+        <nav className="flex items-center gap-8">
+            {navItems.map((item) => (
+                <Link
                     key={item.name}
-                    className={cn(
-                        "font-bold transition-colors hover:text-primary hover:font-extrabold",
-                        pathname === item.link
-                        ? "text-primary underline underline-offset-4"
-                        : "text-primary/70"
-                    )}
-                    >
-                        <p>{item.name}</p>
-                    </Link>
-                ))}
-            </div>
-
-);
-}
+                    href={item.link}
+                    className={
+                        "text-sm font-medium uppercase tracking-[0.12em] transition-colors " +
+                        (pathname === item.link
+                            ? "text-[#F5B544]"
+                            : "text-[#9a9aac] hover:text-[#f4f4f7]")
+                    }
+                >
+                    {item.name}
+                </Link>
+            ))}
+        </nav>
+    );
+};
 
 export default NavItems;

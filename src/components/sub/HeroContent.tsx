@@ -37,6 +37,7 @@ const HeroContent = () => {
                 height={700}
                 width={700}
                 className="h-[36rem] w-[36rem] rounded-full border-2 bg-slate-300 object-contain p-8 shadow-inner shadow-slate-600 filter dark:bg-transparent"
+                priority
             />
             {/* <motion.div
                 variants={slideInFromRight(0.8)}

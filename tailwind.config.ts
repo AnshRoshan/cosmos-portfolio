@@ -1,10 +1,7 @@
 import type { Config } from "tailwindcss"
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
 
 const config = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -93,6 +90,22 @@ const config = {
 } satisfies Config
 
 
+
+// Flatten a (possibly nested) Tailwind color palette into a single-level map.
+// Inlined because Tailwind v4 no longer ships the internal
+// `tailwindcss/lib/util/flattenColorPalette` module.
+function flattenColorPalette(colors: Record<string, any> = {}): Record<string, string> {
+  return Object.assign(
+    {},
+    ...Object.entries(colors).flatMap(([color, values]) =>
+      typeof values === "object" && values !== null
+        ? Object.entries(flattenColorPalette(values)).map(([key, val]) => ({
+            [color + (key === "DEFAULT" ? "" : `-${key}`)]: val,
+          }))
+        : [{ [color]: values }]
+    )
+  );
+}
 
 // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
 function addVariablesForColors({ addBase, theme }: any) {
