@@ -2,9 +2,10 @@ import BackgroundVideo from "@/components/main/BackgroundVideo";
 import Footer from "@/components/main/Footer";
 import Navbar from "@/components/main/Navbar";
 import { ThemeProvider } from "@/components/main/theme-provider";
+import ScrollProgress from "@/components/sub/ScrollProgress";
 import { siteConfig } from "@/config/site";
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -17,6 +18,13 @@ const spaceGrotesk = Space_Grotesk({
     subsets: ["latin"],
     weight: ["400", "500", "600", "700"],
     variable: "--font-display",
+    display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+    subsets: ["latin"],
+    weight: ["400", "500"],
+    variable: "--font-mono",
     display: "swap",
 });
 
@@ -42,15 +50,11 @@ export default function RootLayout({
     return (
         <html lang="en" className="dark" suppressHydrationWarning>
             <body
-                className={`${inter.variable} ${spaceGrotesk.variable} flex min-h-[100dvh] w-full flex-col overflow-x-clip bg-[#040115] text-white antialiased selection:bg-[#F5B544] selection:text-[#040115]`}
+                className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} flex min-h-[100dvh] w-full flex-col overflow-x-clip bg-[#0a0a0b] text-white antialiased selection:bg-[#2dd4bf] selection:text-[#0a0a0b]`}
             >
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="dark"
-                    enableSystem={false}
-                    forcedTheme="dark"
-                >
+                <ThemeProvider>
                     <BackgroundVideo />
+                    <ScrollProgress />
                     <Navbar />
                     <main className="flex-grow">{children}</main>
                     <Footer />

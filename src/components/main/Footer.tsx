@@ -1,72 +1,106 @@
 import Link from "next/link";
-import React from "react";
 import {
-    RxDiscordLogo,
-    RxGithubLogo,
-    RxInstagramLogo,
-    RxLinkedinLogo,
-    RxTwitterLogo,
-} from "react-icons/rx";
+    IconBrandGithub,
+    IconBrandLinkedin,
+    IconBrandX,
+    IconMail,
+} from "@tabler/icons-react";
+import { siteConfig } from "@/config/site";
 
 const Footer = () => {
     return (
-        <footer className="relative bottom-0 z-40 m-4 w-full bg-gray-800 p-8 text-white ">
-            <div className="container mx-auto">
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    <div>
-                        <h2 className="mb-4 font-bold text-2xl">About Us</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua.
+        <footer className="relative z-40 mt-24 border-t border-white/10 bg-[#0a0a0b]/60 backdrop-blur-xl">
+            <div className="mx-auto w-full max-w-[1400px] px-6 py-12 md:px-10">
+
+                {/* Top row */}
+                <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+
+                    {/* Left - wordmark + tagline + mail */}
+                    <div className="flex flex-col gap-3">
+                        <Link href="/" aria-label="Home">
+                            <span className="font-display text-lg font-semibold text-[#e7e7ea]">
+                                Ansh<span className="text-[#2dd4bf]">.</span>
+                            </span>
+                        </Link>
+
+                        <p className="font-mono text-xs text-[#9a9aa4]">
+                            Gen AI developer. Building AI products, end to end.
                         </p>
+
+                        <a
+                            href="mailto:anshroshan813210@gmail.com"
+                            className="inline-flex items-center gap-1.5 font-mono text-xs text-[#9a9aa4] transition-colors duration-200 hover:text-[#2dd4bf]"
+                            aria-label="Send email to Ansh Roshan"
+                        >
+                            <IconMail size={16} stroke={1.6} />
+                            anshroshan813210@gmail.com
+                        </a>
                     </div>
-                    <div>
-                        <h2 className="mb-4 font-bold text-2xl">Contact</h2>
-                        <p>Email: anshroshan813210@gmail.com</p>
-                        <p>Phone: +91 xxx xxx 7742</p>
-                    </div>
-                    <div>
-                        <h2 className="z-100 mb-4 font-bold text-2xl">
-                            Follow Us
-                        </h2>
-                        <div className="flex space-x-4">
-                            <Link
-                                href="https://www.linkedin.com/in/anshroshan/ "
-                                className="text-white hover:text-sky-400 "
+
+                    {/* Right - nav links + social icons */}
+                    <div className="flex flex-col gap-6">
+
+                        {/* Nav links */}
+                        <nav aria-label="Footer navigation">
+                            <ul className="flex flex-wrap gap-6">
+                                {[
+                                    { label: "About", href: "/about" },
+                                    { label: "Projects", href: "/projects" },
+                                    { label: "Blog", href: "/blog" },
+                                    { label: "Contact", href: "/contact" },
+                                ].map(({ label, href }) => (
+                                    <li key={href}>
+                                        <Link
+                                            href={href}
+                                            className="font-mono text-xs uppercase tracking-[0.16em] text-[#9a9aa4] transition-colors duration-200 hover:text-[#5eead4]"
+                                        >
+                                            {label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
+
+                        {/* Social icons */}
+                        <div className="flex items-center gap-4">
+                            <a
+                                href={siteConfig.links.github}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="GitHub"
+                                className="text-[#9a9aa4] transition-colors duration-200 hover:text-[#2dd4bf]"
                             >
-                                {<RxLinkedinLogo size={30} />}
-                            </Link>
-                            <Link
-                                href="https://github.com/AnshRoshan/"
-                                className="text-white hover:text-sky-400"
+                                <IconBrandGithub size={20} stroke={1.6} />
+                            </a>
+                            <a
+                                href={siteConfig.links.linkedin}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="LinkedIn"
+                                className="text-[#9a9aa4] transition-colors duration-200 hover:text-[#2dd4bf]"
                             >
-                                {<RxGithubLogo size={30} />}
-                            </Link>
-                            <Link
-                                href="https://www.instagram.com/anshroshan/"
-                                className="text-white hover:text-sky-400"
+                                <IconBrandLinkedin size={20} stroke={1.6} />
+                            </a>
+                            <a
+                                href={siteConfig.links.twitter}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="X (Twitter)"
+                                className="text-[#9a9aa4] transition-colors duration-200 hover:text-[#2dd4bf]"
                             >
-                                {<RxInstagramLogo size={30} />}
-                            </Link>
-                            <Link
-                                href="https://twitter.com/anshzero"
-                                className="text-white hover:text-sky-400"
-                            >
-                                {<RxTwitterLogo size={30} />}
-                            </Link>
-                            <Link
-                                href="https://discord.gg/Qm9dt5ma"
-                                className="text-white hover:text-sky-400"
-                            >
-                                {<RxDiscordLogo size={30} />}
-                            </Link>
+                                <IconBrandX size={20} stroke={1.6} />
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="mt-8 border-gray-600 border-t pt-4 text-center">
-                <p>&copy; 2024 Ansh Roshan. All Rights Reserved.</p>
+
+                {/* Bottom row */}
+                <div className="mt-10 border-t border-white/10 pt-6">
+                    <p className="font-mono text-xs text-[#9a9aa4]">
+                        &copy; 2026 Ansh Roshan
+                    </p>
+                </div>
+
             </div>
         </footer>
     );

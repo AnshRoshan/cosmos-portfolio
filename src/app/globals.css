@@ -69,18 +69,20 @@
 }
 
 /* ============================================================
-   Cinematic dark design system (Ansh Roshan portfolio redesign)
-   Accent: starlight amber #F5B544 on cosmic navy #040115.
-   Display: Space Grotesk. Body: Inter. Both via next/font vars.
+   Cool Ink + Mint design system (Ansh Roshan / Gen-AI portfolio)
+   Accent: mint #2DD4BF on neutral zinc ink #0A0A0B.
+   Display: Space Grotesk. Body: Inter. Mono: JetBrains Mono.
+   All three via next/font vars. Single accent, dark theme locked.
    ============================================================ */
 
 :root {
-  --ink: #040115;
-  --paper: #f4f4f7;
-  --muted: #9a9aac;
-  --accent: #f5b544;
-  --accent-soft: rgba(245, 181, 68, 0.14);
-  --hairline: rgba(255, 255, 255, 0.1);
+  --ink: #0a0a0b;
+  --surface: #131316;
+  --paper: #e7e7ea;
+  --muted: #9a9aa4;
+  --accent: #2dd4bf;
+  --accent-soft: rgba(45, 212, 191, 0.14);
+  --hairline: rgba(255, 255, 255, 0.08);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -90,6 +92,11 @@ body {
 
 .font-display {
   font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Mono for eyebrows, labels, code-feel metadata (technical register) */
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
 }
 
 /* Hairline divider used to group content without card chrome */
@@ -137,7 +144,7 @@ body {
 /* Solid fallback when transparency/blur is unwanted or unsupported */
 @media (prefers-reduced-transparency: reduce) {
   .liquid-glass {
-    background: rgba(14, 14, 26, 0.94);
+    background: rgba(19, 19, 22, 0.94);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
@@ -214,14 +221,8 @@ body {
   animation-play-state: paused;
 }
 
-/* Honor reduced motion globally for any CSS-driven motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* NOTE: the global prefers-reduced-motion kill-switch was intentionally removed.
+   The owner wants motion always visible on this portfolio, so CSS transitions,
+   the GSAP layer, and framer-motion (MotionConfig reducedMotion="never") all run
+   regardless of the OS setting. Re-add a reduced-motion block here if broad
+   accessibility compliance is needed later. */

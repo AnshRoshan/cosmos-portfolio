@@ -6,8 +6,8 @@ import { useReducedMotion } from "framer-motion";
 
 /**
  * Real WebGL hero accent: a slowly morphing, floating distorted sphere wrapped
- * in a faint wireframe shell, lit with an amber key light to match the page
- * accent. Sits behind the portrait to give the hero genuine 3D depth.
+ * in a faint wireframe shell, lit with a mint key light to match the page
+ * accent (#2dd4bf). Sits behind the portrait to give the hero genuine 3D depth.
  * Motion (distortion + float + rotation) collapses to a static mesh under
  * prefers-reduced-motion.
  */
@@ -23,9 +23,9 @@ export default function Hero3D() {
             aria-hidden
         >
             <ambientLight intensity={0.5} />
-            <directionalLight position={[3, 4, 3]} intensity={1.6} color="#ffd98a" />
-            <pointLight position={[-4, -2, -2]} intensity={2} color="#F5B544" />
-            <pointLight position={[2, -3, 2]} intensity={0.8} color="#6b5bff" />
+            <directionalLight position={[3, 4, 3]} intensity={1.6} color="#7fffe8" />
+            <pointLight position={[-4, -2, -2]} intensity={2} color="#2dd4bf" />
+            <pointLight position={[2, -3, 2]} intensity={0.8} color="#0e7490" />
 
             <Float
                 speed={reduce ? 0 : 1.4}
@@ -35,9 +35,9 @@ export default function Hero3D() {
                 {/* Solid morphing core */}
                 <Sphere args={[1.35, 96, 96]}>
                     <MeshDistortMaterial
-                        color="#161023"
-                        emissive="#F5B544"
-                        emissiveIntensity={0.12}
+                        color="#0f1b1a"
+                        emissive="#2dd4bf"
+                        emissiveIntensity={0.14}
                         roughness={0.25}
                         metalness={0.85}
                         distort={reduce ? 0 : 0.38}
@@ -48,7 +48,7 @@ export default function Hero3D() {
                 {/* Faint wireframe shell for a techy, layered read */}
                 <Icosahedron args={[1.78, 2]}>
                     <meshBasicMaterial
-                        color="#F5B544"
+                        color="#2dd4bf"
                         wireframe
                         transparent
                         opacity={0.12}

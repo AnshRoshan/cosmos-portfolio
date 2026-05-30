@@ -15,20 +15,24 @@ const NavItems = () => {
 
     return (
         <nav className="flex items-center gap-8">
-            {navItems.map((item) => (
-                <Link
-                    key={item.name}
-                    href={item.link}
-                    className={
-                        "text-sm font-medium uppercase tracking-[0.12em] transition-colors " +
-                        (pathname === item.link
-                            ? "text-[#F5B544]"
-                            : "text-[#9a9aac] hover:text-[#f4f4f7]")
-                    }
-                >
-                    {item.name}
-                </Link>
-            ))}
+            {navItems.map((item) => {
+                const active =
+                    pathname === item.link || pathname?.startsWith(`${item.link}/`);
+                return (
+                    <Link
+                        key={item.name}
+                        href={item.link}
+                        className={
+                            "text-sm font-medium uppercase tracking-[0.12em] transition-colors " +
+                            (active
+                                ? "text-[#2dd4bf]"
+                                : "text-[#9a9aa4] hover:text-[#e7e7ea]")
+                        }
+                    >
+                        {item.name}
+                    </Link>
+                );
+            })}
         </nav>
     );
 };

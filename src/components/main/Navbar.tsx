@@ -30,13 +30,13 @@ const socialLinks = [
 
 const Navbar = () => {
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#040115]/70 backdrop-blur-xl">
+        <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0a0a0b]/70 backdrop-blur-xl">
             <div className="mx-auto flex h-[68px] w-full max-w-[1400px] items-center justify-between px-6 md:px-10">
 
                 {/* Left: wordmark */}
                 <Link href="/" aria-label="Ansh Roshan - home">
-                    <span className="font-display text-lg font-semibold tracking-tight text-[#f4f4f7]">
-                        Ansh<span className="text-[#F5B544]">.</span>
+                    <span className="font-display text-lg font-semibold tracking-tight text-[#e7e7ea]">
+                        Ansh<span className="text-[#2dd4bf]">.</span>
                     </span>
                 </Link>
 
@@ -54,7 +54,7 @@ const Navbar = () => {
                             target="_blank"
                             rel="noreferrer"
                             aria-label={name}
-                            className="p-2 rounded-full text-[#9a9aac] hover:text-[#f4f4f7] hover:bg-white/5 transition-colors"
+                            className="p-2 rounded-full text-[#9a9aa4] hover:text-[#e7e7ea] hover:bg-white/5 transition-colors"
                         >
                             <Icon size={20} strokeWidth={1.5} />
                             <span className="sr-only">{name}</span>

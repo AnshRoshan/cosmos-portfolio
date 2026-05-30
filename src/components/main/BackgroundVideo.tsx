@@ -1,16 +1,36 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 /**
- * Cinematic looping video backdrop, fixed behind all content.
- * Sits on the cosmic-navy base with a dark gradient scrim (for text contrast)
- * and a film-grain veil on top. Drop a /hero-bg.webm next to the mp4 later and
- * uncomment the source below; the browser will prefer it automatically.
+ * Cinematic looping video backdrop, fixed behind all content, on the ink base
+ * (#0a0a0b) with a dark scrim (for text contrast), a side vignette, and a
+ * film-grain veil. Per-route: the About page uses the abstract "vex" clip;
+ * every other page uses the "space" voyage. WebM (VP9) is listed first for
+ * bandwidth; the browser falls back to mp4 only where one is provided.
  */
+const SOURCES = {
+    space: { webm: "/hero-bg.webm", mp4: "/hero-bg.mp4" }, // cosmic space voyage
+    vex: { webm: "/bg-vex.webm" }, // dark abstract (About page)
+} as const;
+
+function variantFor(pathname: string | null): keyof typeof SOURCES {
+    return pathname?.startsWith("/about") ? "vex" : "space";
+}
+
 export default function BackgroundVideo() {
+    const pathname = usePathname();
+    const variant = variantFor(pathname);
+    const src = SOURCES[variant];
+
     return (
         <div
             aria-hidden
-            className="pointer-events-none fixed inset-0 -z-20 overflow-hidden bg-[#040115]"
+            className="pointer-events-none fixed inset-0 -z-20 overflow-hidden bg-[#0a0a0b]"
         >
+            {/* key forces a remount so the source swaps when the route changes */}
             <video
+                key={variant}
                 autoPlay
                 loop
                 muted
@@ -18,18 +38,20 @@ export default function BackgroundVideo() {
                 preload="auto"
                 className="h-full w-full object-cover opacity-90"
             >
-                {/* <source src="/hero-bg.webm" type="video/webm" /> */}
-                <source src="/hero-bg.mp4" type="video/mp4" />
+                <source src={src.webm} type="video/webm" />
+                {"mp4" in src ? (
+                    <source src={src.mp4} type="video/mp4" />
+                ) : null}
             </video>
 
             {/* Readability scrim: darker top/bottom, lighter middle */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#040115]/80 via-[#040115]/45 to-[#040115]/90" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0b]/80 via-[#0a0a0b]/45 to-[#0a0a0b]/90" />
             {/* Side vignette */}
             <div
                 className="absolute inset-0"
                 style={{
                     background:
-                        "radial-gradient(120% 80% at 50% 35%, transparent 45%, rgba(4,1,21,0.65) 100%)",
+                        "radial-gradient(120% 80% at 50% 35%, transparent 45%, rgba(10,10,11,0.65) 100%)",
                 }}
             />
             {/* Film grain */}

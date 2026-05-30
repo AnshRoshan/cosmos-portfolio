@@ -3,9 +3,11 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { IconArrowDownRight } from "@tabler/icons-react";
-import FadeIn from "../sub/FadeIn";
 import Magnet from "../sub/Magnet";
+import Parallax from "../sub/Parallax";
 import PillButton from "../sub/PillButton";
+import Reveal from "../sub/Reveal";
+import SplitReveal from "../sub/SplitReveal";
 
 // WebGL accent is client-only and below the fold of the headline; load lazily.
 const Hero3D = dynamic(() => import("../sub/Hero3D"), { ssr: false });
@@ -16,31 +18,32 @@ const Hero = () => {
             <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
                 {/* Left: copy */}
                 <div className="order-2 lg:order-1">
-                    <FadeIn y={-12}>
-                        <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.28em] text-[#9a9aac]">
-                            <span className="h-px w-8 bg-[#F5B544]" />
+                    <Reveal y={-12}>
+                        <span className="font-mono inline-flex items-center gap-2.5 text-xs uppercase tracking-[0.22em] text-[#9a9aa4]">
+                            <span className="h-px w-8 bg-[#2dd4bf]" />
                             Ansh Roshan
                         </span>
-                    </FadeIn>
+                    </Reveal>
 
-                    <FadeIn delay={0.12} y={36}>
+                    <SplitReveal delay={0.1} stagger={0.05}>
                         <h1 className="font-display mt-6 text-balance text-5xl font-semibold leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl">
-                            Engineering web
+                            Engineering AI
                             <br className="hidden sm:block" /> products,{" "}
-                            <span className="bg-gradient-to-r from-[#ffd98a] via-[#F5B544] to-[#ff9d3d] bg-clip-text text-transparent [text-shadow:0_0_40px_rgba(245,181,68,0.25)]">
+                            <span className="bg-gradient-to-r from-[#7fffe8] via-[#2dd4bf] to-[#14b8a6] bg-clip-text text-transparent">
                                 end to end.
                             </span>
                         </h1>
-                    </FadeIn>
+                    </SplitReveal>
 
-                    <FadeIn delay={0.26} y={20}>
-                        <p className="mt-7 max-w-[42ch] text-base leading-relaxed text-[#b6b6c4] sm:text-lg">
-                            Full-stack and DevOps developer building fast, polished
-                            interfaces and the infrastructure that runs them.
+                    <Reveal delay={0.26} y={20}>
+                        <p className="mt-7 max-w-[46ch] text-base leading-relaxed text-[#9a9aa4] sm:text-lg">
+                            Gen AI developer at TCS. I build agentic systems, RAG
+                            pipelines, and the full-stack products around them,
+                            then ship the whole thing to production.
                         </p>
-                    </FadeIn>
+                    </Reveal>
 
-                    <FadeIn delay={0.4} y={20}>
+                    <Reveal delay={0.4} y={20}>
                         <div className="mt-10 flex flex-wrap items-center gap-4">
                             <PillButton href="/contact">Get in touch</PillButton>
                             <PillButton href="/#projects" variant="ghost">
@@ -48,24 +51,24 @@ const Hero = () => {
                                 <IconArrowDownRight size={18} stroke={1.8} />
                             </PillButton>
                         </div>
-                    </FadeIn>
+                    </Reveal>
                 </div>
 
                 {/* Right: magnetic portrait floating over a real 3D object */}
-                <FadeIn
+                <Reveal
                     delay={0.32}
                     x={28}
                     className="order-1 flex justify-center lg:order-2 lg:justify-end"
                 >
                     <div className="relative aspect-square w-[300px] sm:w-[400px] lg:w-[500px]">
                         {/* 3D WebGL backdrop, peeking around the portrait */}
-                        <div className="absolute inset-[-20%] -z-0">
+                        <Parallax speed={0.16} className="absolute inset-[-20%] -z-0">
                             <Hero3D />
-                        </div>
-                        {/* Soft amber bloom */}
+                        </Parallax>
+                        {/* Soft mint bloom */}
                         <div
                             aria-hidden
-                            className="absolute inset-0 -z-0 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(245,181,68,0.18),transparent_60%)] blur-2xl"
+                            className="absolute inset-0 -z-0 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(45,212,191,0.18),transparent_60%)] blur-2xl"
                         />
                         <Magnet
                             padding={140}
@@ -85,7 +88,7 @@ const Hero = () => {
                             </div>
                         </Magnet>
                     </div>
-                </FadeIn>
+                </Reveal>
             </div>
         </section>
     );
