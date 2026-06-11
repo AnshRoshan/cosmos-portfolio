@@ -16,6 +16,12 @@
 # production
 /build
 
+# Kilo local config
+.kilo/
+
+# Bun local cache when Bun installs into the project root
+~/
+
 # misc
 .DS_Store
 *.pem

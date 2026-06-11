@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     }
 
     const revalidateBlog = () => {
-        revalidateTag("post"); // busts every fetch tagged "post" (list + detail)
+        revalidateTag("post", "default");
         revalidatePath("/blog");
         revalidatePath("/blog/[...slug]", "page");
         revalidatePath("/tags");
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
         revalidatePath("/sitemap.xml");
     };
     const revalidateProjects = () => {
-        revalidateTag("project"); // busts list, featured, AND detail queries
+        revalidateTag("project", "default");
         revalidatePath("/");
         revalidatePath("/projects");
         revalidatePath("/projects/[slug]", "page");
