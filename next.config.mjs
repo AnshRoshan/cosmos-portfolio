@@ -1,16 +1,7 @@
 import { withSentryConfig } from "@sentry/nextjs";
 
-// Next.js 16 uses Turbopack by default, which does not run webpack plugins.
-// Velite is therefore kicked off here at config-load time so content
-// collections are generated for both `next dev` (watch) and `next build`.
-const isDev = process.argv.includes("dev");
-const isBuild = process.argv.includes("build");
-
-if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
-  process.env.VELITE_STARTED = "1";
-  const { build } = await import("velite");
-  await build({ watch: isDev, clean: !isDev });
-}
+// Blog/project content is served from Sanity at request time (ISR + webhook
+// revalidation), so there is no build-time content step here anymore.
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -18,6 +9,21 @@ const nextConfig = {
   // lockfile elsewhere on the machine (e.g. ~/package-lock.json).
   turbopack: {
     root: import.meta.dirname,
+  },
+  images: {
+    remotePatterns: [
+      // Sanity image CDN (blog cover images, in-body images, project covers).
+      { protocol: "https", hostname: "cdn.sanity.io" },
+    ],
+  },
+  experimental: {
+    // Tree-shake large barrel-export packages so only the icons/helpers we use
+    // ship to the client (big win for @tabler/icons-react).
+    optimizePackageImports: [
+      "@tabler/icons-react",
+      "framer-motion",
+      "lucide-react",
+    ],
   },
 };
 

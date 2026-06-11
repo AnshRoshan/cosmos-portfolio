@@ -20,8 +20,8 @@ export function PostItem({
 }: PostItemProps) {
     return (
         <article className="group flex flex-col gap-3 border-b border-white/10 py-7">
-            <h2 className="font-display text-2xl font-semibold tracking-tight text-[#e7e7ea] transition-colors group-hover:text-[#2dd4bf]">
-                <Link href={`/${slug}`}>{title}</Link>
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-[#e7e7ea] transition-colors group-hover:text-[#22d3ee]">
+                <Link href={`/blog/${slug}`}>{title}</Link>
             </h2>
 
             {tags?.length ? (
@@ -47,8 +47,8 @@ export function PostItem({
                     </dd>
                 </dl>
                 <Link
-                    href={`/${slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.12em] text-[#e7e7ea] transition-colors hover:text-[#2dd4bf]"
+                    href={`/blog/${slug}`}
+                    className="inline-flex items-center gap-1.5 rounded-sm text-xs font-medium uppercase tracking-[0.12em] text-[#e7e7ea] transition-colors hover:text-[#22d3ee] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b]"
                 >
                     Read more <IconArrowRight size={15} stroke={1.8} />
                 </Link>

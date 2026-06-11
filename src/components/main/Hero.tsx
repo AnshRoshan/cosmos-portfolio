@@ -1,16 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { IconArrowDownRight } from "@tabler/icons-react";
-import Magnet from "../sub/Magnet";
-import Parallax from "../sub/Parallax";
 import PillButton from "../sub/PillButton";
 import Reveal from "../sub/Reveal";
-import SplitReveal from "../sub/SplitReveal";
-
-// WebGL accent is client-only and below the fold of the headline; load lazily.
-const Hero3D = dynamic(() => import("../sub/Hero3D"), { ssr: false });
+import RotatingText from "../sub/RotatingText";
 
 const Hero = () => {
     return (
@@ -19,74 +13,94 @@ const Hero = () => {
                 {/* Left: copy */}
                 <div className="order-2 lg:order-1">
                     <Reveal y={-12}>
-                        <span className="font-mono inline-flex items-center gap-2.5 text-xs uppercase tracking-[0.22em] text-[#9a9aa4]">
-                            <span className="h-px w-8 bg-[#2dd4bf]" />
-                            Ansh Roshan
+                        <span className="font-mono inline-flex items-center gap-2.5 text-sm uppercase tracking-[0.22em] text-[#9a9aa4]">
+                            <span className="h-px w-8 bg-[#22d3ee]" />
+                            <span className="shimmer-text">Gen AI Developer</span>
                         </span>
                     </Reveal>
 
-                    <SplitReveal delay={0.1} stagger={0.05}>
+                    {/* Hero headline is the LCP element — render it visible on
+                        first paint (transform-only entrance, no opacity gating)
+                        instead of the masked word-reveal, so LCP isn't blocked
+                        on JS. Kinetic SplitReveal stays on below-the-fold heads. */}
+                    <Reveal y={20} fade={false}>
                         <h1 className="font-display mt-6 text-balance text-5xl font-semibold leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl">
                             Engineering AI
                             <br className="hidden sm:block" /> products,{" "}
-                            <span className="bg-gradient-to-r from-[#7fffe8] via-[#2dd4bf] to-[#14b8a6] bg-clip-text text-transparent">
-                                end to end.
-                            </span>
+                            <span className="text-[#22d3ee]">end to end.</span>
                         </h1>
-                    </SplitReveal>
+                    </Reveal>
 
-                    <Reveal delay={0.26} y={20}>
-                        <p className="mt-7 max-w-[46ch] text-base leading-relaxed text-[#9a9aa4] sm:text-lg">
-                            Gen AI developer at TCS. I build agentic systems, RAG
-                            pipelines, and the full-stack products around them,
-                            then ship the whole thing to production.
+                    <Reveal delay={0.22} y={16}>
+                        <p className="mt-5 font-mono text-sm uppercase tracking-[0.2em] text-[#9a9aa4]">
+                            Building{" "}
+                            <RotatingText
+                                words={[
+                                    "agentic systems",
+                                    "RAG pipelines",
+                                    "LLM apps",
+                                    "production AI",
+                                ]}
+                                className="font-semibold text-[#22d3ee]"
+                            />
+                        </p>
+                    </Reveal>
+
+                    <Reveal delay={0.28} y={20}>
+                        <p className="mt-5 max-w-[46ch] text-base leading-relaxed text-[#9a9aa4] sm:text-lg">
+                            Gen AI developer at TCS. I design the agentic
+                            backend, the interface users touch, and everything in
+                            between, then ship it to production.
                         </p>
                     </Reveal>
 
                     <Reveal delay={0.4} y={20}>
                         <div className="mt-10 flex flex-wrap items-center gap-4">
-                            <PillButton href="/contact">Get in touch</PillButton>
-                            <PillButton href="/#projects" variant="ghost">
+                            <PillButton href="/contact" variant="electric">
+                                Get in touch
+                            </PillButton>
+                            <PillButton href="/#projects" variant="ghost" sweep>
                                 View work
                                 <IconArrowDownRight size={18} stroke={1.8} />
                             </PillButton>
                         </div>
                     </Reveal>
+
                 </div>
 
-                {/* Right: magnetic portrait floating over a real 3D object */}
+                {/* Right: cutout floating in front of a glowing glass disc */}
                 <Reveal
-                    delay={0.32}
+                    delay={0.1}
                     x={28}
+                    fade={false}
                     className="order-1 flex justify-center lg:order-2 lg:justify-end"
                 >
-                    <div className="relative aspect-square w-[300px] sm:w-[400px] lg:w-[500px]">
-                        {/* 3D WebGL backdrop, peeking around the portrait */}
-                        <Parallax speed={0.16} className="absolute inset-[-20%] -z-0">
-                            <Hero3D />
-                        </Parallax>
+                    <div className="relative aspect-square w-[320px] sm:w-[420px] lg:w-[520px]">
                         {/* Soft mint bloom */}
                         <div
                             aria-hidden
-                            className="absolute inset-0 -z-0 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(45,212,191,0.18),transparent_60%)] blur-2xl"
+                            className="absolute inset-[-4%] -z-10 rounded-full bg-[radial-gradient(circle_at_50%_42%,rgba(34,211,238,0.22),transparent_62%)] blur-2xl"
                         />
-                        <Magnet
-                            padding={140}
-                            strength={4}
-                            className="relative z-10 h-full w-full"
-                        >
-                            <div className="liquid-glass relative grid h-full w-full place-items-center rounded-full p-3">
-                                <Image
-                                    src="/main.png"
-                                    alt="Ansh Roshan"
-                                    width={520}
-                                    height={520}
-                                    priority
-                                    sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 500px"
-                                    className="h-full w-full rounded-full object-contain"
-                                />
-                            </div>
-                        </Magnet>
+                        {/* Rotating mint orb glow */}
+                        <div
+                            aria-hidden
+                            className="hero-orb absolute inset-[12%] -z-10 rounded-full"
+                        />
+                        {/* Faint uniform ring — subtle structure, no hard top edge */}
+                        <div
+                            aria-hidden
+                            className="absolute inset-[7%] -z-10 rounded-full border border-white/[0.06]"
+                        />
+                        {/* Static cutout — head/shoulders break the disc (no magnet drift) */}
+                        <Image
+                            src="/ansh-avatar.webp"
+                            alt="Ansh Roshan"
+                            width={560}
+                            height={560}
+                            priority
+                            sizes="(max-width: 640px) 320px, (max-width: 1024px) 420px, 520px"
+                            className="relative z-10 h-full w-full object-contain object-bottom drop-shadow-[0_28px_55px_rgba(0,0,0,0.55)]"
+                        />
                     </div>
                 </Reveal>
             </div>

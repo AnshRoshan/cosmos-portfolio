@@ -21,6 +21,7 @@ export default function Reveal({
     delay = 0,
     className,
     start = "top 90%",
+    fade = true,
 }: {
     children: React.ReactNode;
     x?: number;
@@ -28,6 +29,12 @@ export default function Reveal({
     delay?: number;
     className?: string;
     start?: string;
+    /**
+     * When false, the element keeps full opacity and only slides in. Use for
+     * above-the-fold LCP elements so they paint immediately instead of being
+     * hidden (opacity:0) until GSAP runs.
+     */
+    fade?: boolean;
 }) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -36,7 +43,7 @@ export default function Reveal({
             const el = ref.current;
             if (!el) return;
             gsap.from(el, {
-                opacity: 0,
+                ...(fade ? { opacity: 0 } : {}),
                 x,
                 y,
                 duration: 0.9,

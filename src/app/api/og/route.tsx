@@ -1,58 +1,120 @@
-import { siteConfig } from "@/config/site";
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
+import { siteConfig } from "@/config/site";
 
 export const runtime = "edge";
 
 const interBold = fetch(
-    new URL("../../../assets/fonts/Inter-Bold.ttf", import.meta.url)
+    new URL("../../../assets/fonts/Inter-Bold.ttf", import.meta.url),
 ).then((res) => res.arrayBuffer());
 
 export async function GET(req: NextRequest) {
     try {
         const fontBold = await interBold;
-
         const { searchParams } = req.nextUrl;
-        const title = searchParams.get("title");
 
-        if (!title) {
-            return new Response("No title provided", { status: 500 });
-        }
-
-        const heading =
-            title.length > 140 ? `${title.substring(0, 140)}...` : title;
+        const rawTitle = searchParams.get("title") || siteConfig.title;
+        const title =
+            rawTitle.length > 110 ? `${rawTitle.slice(0, 110)}…` : rawTitle;
+        const eyebrow = searchParams.get("eyebrow") || "Gen AI Developer";
+        const host = siteConfig.url.replace(/^https?:\/\//, "");
 
         return new ImageResponse(
-            <div tw="flex relative flex-col p-12 w-full h-full items-start text-black bg-white">
-                <div tw="flex items-center">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#000000"
-                        version="1.1"
-                        id="Layer_1"
-                        width="80px"
-                        height="100px"
-                        viewBox="0 0 256 249"
-                        enable-background="new 0 0 256 249"
+            <div
+                style={{
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    width: "100%",
+                    height: "100%",
+                    padding: "72px",
+                    background: "#0a0a0b",
+                    fontFamily: "Inter",
+                    overflow: "hidden",
+                }}
+            >
+                {/* Mint glow */}
+                <div
+                    style={{
+                        position: "absolute",
+                        top: -220,
+                        right: -160,
+                        width: 640,
+                        height: 640,
+                        background:
+                            "radial-gradient(circle, rgba(34,211,238,0.22), rgba(34,211,238,0) 70%)",
+                    }}
+                />
+
+                {/* Brand */}
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <div
+                        style={{
+                            width: 16,
+                            height: 16,
+                            borderRadius: 9999,
+                            background: "#22d3ee",
+                        }}
+                    />
+                    <div
+                        style={{
+                            marginLeft: 16,
+                            fontSize: 30,
+                            color: "#e7e7ea",
+                        }}
                     >
-                        <title>logo</title>
-                        <path d="M47.522,170.287l11.172,76.681h138.612l11.172-76.681H47.522z M128,215.249c-5.748,0-10.407-3.063-10.407-6.84  s4.659-6.84,10.407-6.84c5.748,0,10.407,3.062,10.407,6.84S133.748,215.249,128,215.249z M233.315,233.054h-26.028l10.292-70.639  H38.421l10.292,70.639H22.685c-14.848,0-24.85-15.195-18.978-28.834l36.809-85.489c7.149-16.605,23.493-27.362,41.571-27.362h14.486  l22.885,34.061l4.665-22.254l-7.809-11.807h23.491l-7.81,11.807l4.655,22.098l22.78-33.905h14.486  c18.078,0,34.422,10.757,41.571,27.362l36.808,85.489C258.165,217.858,248.164,233.054,233.315,233.054z M128,2.033  c22.496,0,40.733,18.237,40.733,40.733S150.496,83.498,128,83.498S87.267,65.261,87.267,42.765S105.504,2.033,128,2.033z" />
-                    </svg>
-                    <p tw="ml-10 font-bold text-5xl">Ansh Roshan</p>
-                </div>
-                <div tw="flex flex-col flex-1 py-12 w-2/3 mx-auto">
-                    <div tw="flex text-4xl uppercase font-bold tracking-tight ">
-                        BLOG POST
-                    </div>
-                    <div tw="flex font-bold  text-slate-700 mt-4 text-7xl">
-                        {heading}
+                        Ansh Roshan
                     </div>
                 </div>
-                <div tw="flex items-center w-full justify-between">
-                    <div tw="flex text-xl">{siteConfig.url}</div>
-                    <div tw="flex items-center text-xl">
-                        <div tw="flex ml-2">{siteConfig.links.github}</div>
+
+                {/* Eyebrow + title */}
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            fontSize: 24,
+                            color: "#22d3ee",
+                            textTransform: "uppercase",
+                            letterSpacing: 5,
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: 44,
+                                height: 3,
+                                background: "#22d3ee",
+                                marginRight: 18,
+                            }}
+                        />
+                        {eyebrow}
                     </div>
+                    <div
+                        style={{
+                            marginTop: 28,
+                            fontSize: 72,
+                            lineHeight: 1.05,
+                            color: "#f4f4f5",
+                            maxWidth: 980,
+                        }}
+                    >
+                        {title}
+                    </div>
+                </div>
+
+                {/* Footer */}
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        fontSize: 24,
+                        color: "#9a9aa4",
+                    }}
+                >
+                    <div style={{ display: "flex" }}>{host}</div>
+                    <div style={{ display: "flex" }}>@anshzero</div>
                 </div>
             </div>,
             {
@@ -66,9 +128,9 @@ export async function GET(req: NextRequest) {
                         weight: 700,
                     },
                 ],
-            }
+            },
         );
-    } catch (error) {
+    } catch {
         return new Response("Failed to generate image", { status: 500 });
     }
 }

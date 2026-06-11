@@ -45,7 +45,8 @@ const rowB = allSkills.slice(mid);
 function Chip({ item }: { item: Skill }) {
     const IconCmp = item.icon ? ICON_MAP[item.icon] : null;
     return (
-        <div className="liquid-glass flex min-w-max shrink-0 cursor-default items-center gap-2.5 rounded-full px-5 py-3 transition-transform duration-200 hover:-translate-y-0.5">
+        <div className="group shrink-0">
+        <div className="liquid-glass flex min-w-max cursor-default items-center gap-2.5 rounded-full px-5 py-3 transition-transform duration-200 group-hover:-translate-y-1">
             {item.img ? (
                 <img
                     src={item.img}
@@ -55,11 +56,12 @@ function Chip({ item }: { item: Skill }) {
                     className="object-contain"
                 />
             ) : IconCmp ? (
-                <IconCmp size={18} stroke={1.6} className="text-[#2dd4bf]" />
+                <IconCmp size={18} stroke={1.6} className="text-[#22d3ee]" />
             ) : null}
-            <span className="font-mono whitespace-nowrap text-xs text-[#e7e7ea]">
+            <span className="font-mono whitespace-nowrap text-xs text-[#e7e7ea] transition-colors group-hover:text-[#22d3ee]">
                 {item.name}
             </span>
+        </div>
         </div>
     );
 }
@@ -114,9 +116,9 @@ function MarqueeRow({
 
 export default function Marquee() {
     return (
-        <section className="relative mx-auto w-full max-w-[1400px] px-6 py-24 md:px-10 md:py-32">
+        <section className="relative mx-auto w-full max-w-[1400px] px-6 py-16 md:px-10 md:py-24">
             <SplitReveal>
-                <h2 className="font-display text-3xl font-semibold tracking-tight text-[#e7e7ea] sm:text-4xl lg:text-5xl">
+                <h2 className="text-gradient font-display text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
                     The stack I build with
                 </h2>
             </SplitReveal>

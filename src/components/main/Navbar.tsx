@@ -1,74 +1,86 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
-import Link from "next/link";
 import {
     IconBrandGithub,
+    IconBrandInstagram,
     IconBrandLinkedin,
     IconBrandX,
 } from "@tabler/icons-react";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import Link from "next/link";
+import { useState } from "react";
+import { siteConfig } from "@/config/site";
+import MagneticSocial from "../sub/MagneticSocial";
 import { MobileNav } from "./MobileNav";
 import NavItems from "./NavItems";
 
-const socialLinks = [
-    {
-        name: "GitHub",
-        href: siteConfig.links.github,
-        icon: IconBrandGithub,
-    },
-    {
-        name: "LinkedIn",
-        href: siteConfig.links.linkedin,
-        icon: IconBrandLinkedin,
-    },
-    {
-        name: "X (Twitter)",
-        href: siteConfig.links.twitter,
-        icon: IconBrandX,
-    },
+const socials = [
+    { name: "GitHub", href: siteConfig.links.github, icon: IconBrandGithub },
+    { name: "LinkedIn", href: siteConfig.links.linkedin, icon: IconBrandLinkedin },
+    { name: "X (Twitter)", href: siteConfig.links.twitter, icon: IconBrandX },
+    { name: "Instagram", href: siteConfig.links.instagram, icon: IconBrandInstagram },
 ];
 
+/**
+ * Floating, transparent header with a console signature: a mono wordmark with a
+ * blinking cyan caret, decode-on-hover nav links (NavItems), and magnetic
+ * social icons for one-click direct access. A blurred scrim + hairline fades in
+ * after the fold so everything stays legible over scrolling content.
+ */
 const Navbar = () => {
-    return (
-        <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0a0a0b]/70 backdrop-blur-xl">
-            <div className="mx-auto flex h-[68px] w-full max-w-[1400px] items-center justify-between px-6 md:px-10">
+    const { scrollY } = useScroll();
+    const [scrolled, setScrolled] = useState(false);
 
-                {/* Left: wordmark */}
-                <Link href="/" aria-label="Ansh Roshan - home">
-                    <span className="font-display text-lg font-semibold tracking-tight text-[#e7e7ea]">
-                        Ansh<span className="text-[#2dd4bf]">.</span>
+    useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 8));
+
+    return (
+        <motion.header
+            initial={{ y: -24, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className={
+                "sticky top-0 z-50 w-full border-b transition-colors duration-300 " +
+                (scrolled
+                    ? "border-white/10 bg-[#0a0a0b]/60 backdrop-blur-xl"
+                    : "border-transparent")
+            }
+        >
+            <div className="mx-auto flex h-[72px] w-full max-w-[1400px] items-center justify-between px-6 md:px-10">
+                {/* Wordmark: mono name + blinking terminal caret */}
+                <Link
+                    href="/"
+                    aria-label="Ansh Roshan, home"
+                    className="group inline-flex items-center gap-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] focus-visible:ring-offset-4 focus-visible:ring-offset-[#0a0a0b]"
+                >
+                    <span className="font-mono text-sm font-medium tracking-tight text-[#e7e7ea] transition-colors group-hover:text-white">
+                        ansh roshan
                     </span>
+                    <span
+                        aria-hidden
+                        className="caret-blink ml-0.5 inline-block h-[15px] w-[7px] translate-y-px bg-[#22d3ee]"
+                    />
                 </Link>
 
-                {/* Center: nav links (desktop only) */}
+                {/* Center: decode-on-hover nav (desktop) */}
                 <div className="hidden lg:flex">
                     <NavItems />
                 </div>
 
-                {/* Right: social icons + mobile menu */}
-                <div className="flex items-center gap-1">
-                    {socialLinks.map(({ name, href, icon: Icon }) => (
-                        <Link
-                            key={name}
-                            href={href}
-                            target="_blank"
-                            rel="noreferrer"
-                            aria-label={name}
-                            className="p-2 rounded-full text-[#9a9aa4] hover:text-[#e7e7ea] hover:bg-white/5 transition-colors"
-                        >
-                            <Icon size={20} strokeWidth={1.5} />
-                            <span className="sr-only">{name}</span>
-                        </Link>
-                    ))}
-
-                    {/* Mobile hamburger (visible below lg) */}
-                    <div className="lg:hidden ml-1">
+                {/* Right: magnetic social icons (desktop) / menu (mobile) */}
+                <div className="flex items-center">
+                    <div className="hidden items-center gap-1.5 lg:flex">
+                        {socials.map(({ name, href, icon: Icon }) => (
+                            <MagneticSocial key={name} href={href} label={name}>
+                                <Icon size={19} stroke={1.5} />
+                            </MagneticSocial>
+                        ))}
+                    </div>
+                    <div className="lg:hidden">
                         <MobileNav />
                     </div>
                 </div>
-
             </div>
-        </header>
+        </motion.header>
     );
 };
 

@@ -1,91 +1,108 @@
-import { Tag } from "@/components/sub/Tag";
-import { PostItem } from "@/components/sub/post-item";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAllTags, getPostsByTagSlug, sortTagsByCount } from "@/lib/blogUtil";
 import { slug } from "github-slugger";
 import type { Metadata } from "next";
-import { posts } from "#site/content";
+import { PostItem } from "@/components/sub/post-item";
+import Reveal from "@/components/sub/Reveal";
+import SplitReveal from "@/components/sub/SplitReveal";
+import { Tag } from "@/components/sub/Tag";
+import {
+    getAllTags,
+    getPostsByTagSlug,
+    sortPosts,
+    sortTagsByCount,
+} from "@/lib/blogUtil";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { postsQuery } from "@/sanity/lib/queries";
+import type { SanityPost } from "@/sanity/lib/types";
 
 interface TagPageProps {
-    params: Promise<{
-        tag: string;
-    }>;
+    params: Promise<{ tag: string }>;
 }
 
 export async function generateMetadata({
     params,
 }: TagPageProps): Promise<Metadata> {
     const { tag } = await params;
+    const title = tag.split("-").join(" ");
     return {
-        title: tag,
-        description: `Posts on the topic of ${tag}`,
+        title,
+        description: `Posts on the topic of ${title}.`,
     };
 }
 
-export const generateStaticParams = () => {
+export async function generateStaticParams() {
+    const posts = await sanityFetch<SanityPost[]>(
+        { query: postsQuery, tags: ["post"] },
+        [],
+    );
     const tags = getAllTags(posts);
-    const paths = Object.keys(tags).map((tag) => ({ tag: slug(tag) }));
-    return paths;
-};
+    return Object.keys(tags).map((tag) => ({ tag: slug(tag) }));
+}
 
 export default async function TagPage({ params }: TagPageProps) {
     const { tag } = await params;
     const title = tag.split("-").join(" ");
 
-    const displayPosts = getPostsByTagSlug(posts, tag);
+    const posts = await sanityFetch<SanityPost[]>(
+        { query: postsQuery, tags: ["post"] },
+        [],
+    );
+    const displayPosts = sortPosts(getPostsByTagSlug(posts, tag));
     const tags = getAllTags(posts);
     const sortedTags = sortTagsByCount(tags);
 
     return (
-        <div className="container max-w-4xl py-6 lg:py-10">
-            <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
-                <div className="flex-1 space-y-4">
-                    <h1 className="inline-block font-black text-4xl capitalize lg:text-5xl">
-                        {title}
-                    </h1>
-                </div>
-            </div>
-            <div className="mt-8 grid grid-cols-12 gap-3">
-                <div className="col-span-12 col-start-1 sm:col-span-8">
-                    <hr />
-                    {displayPosts?.length > 0 ? (
-                        <ul className="flex flex-col">
-                            {displayPosts.map((post) => {
-                                const { slug, date, title, description, tags } =
-                                    post;
-                                return (
-                                    <li key={slug}>
-                                        <PostItem
-                                            slug={slug}
-                                            date={date}
-                                            title={title}
-                                            description={description}
-                                            tags={tags}
-                                        />
-                                    </li>
-                                );
-                            })}
+        <section className="relative mx-auto w-full max-w-5xl px-6 pt-12 pb-24 md:px-10 md:pt-16">
+            <Reveal y={24}>
+                <span className="font-mono inline-flex items-center gap-2.5 text-sm uppercase tracking-[0.22em] text-[#9a9aa4]">
+                    <span className="h-px w-8 bg-[#22d3ee]" />
+                    Tag
+                </span>
+            </Reveal>
+            <SplitReveal className="mt-6">
+                <h1 className="text-gradient font-display text-4xl font-semibold capitalize tracking-tight sm:text-5xl lg:text-6xl">
+                    {title}
+                </h1>
+            </SplitReveal>
+
+            <div className="mt-14 grid grid-cols-12 gap-10">
+                <div className="col-span-12 lg:col-span-8">
+                    {displayPosts.length > 0 ? (
+                        <ul className="flex flex-col border-t border-white/10">
+                            {displayPosts.map((post) => (
+                                <li key={post.slug}>
+                                    <PostItem
+                                        slug={post.slug}
+                                        date={post.date}
+                                        title={post.title}
+                                        description={post.description}
+                                        tags={post.tags}
+                                    />
+                                </li>
+                            ))}
                         </ul>
                     ) : (
-                        <p>Nothing to see here yet</p>
+                        <p className="text-[#9a9aa4]">Nothing to see here yet.</p>
                     )}
                 </div>
-                <Card className="col-span-12 row-start-3 h-fit sm:col-span-4 sm:col-start-9 sm:row-start-1">
-                    <CardHeader>
-                        <CardTitle>Tags</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex flex-wrap gap-2">
-                        {sortedTags?.map((t) => (
-                            <Tag
-                                tag={t}
-                                key={t}
-                                count={tags[t]}
-                                current={slug(t) === tag}
-                            />
-                        ))}
-                    </CardContent>
-                </Card>
+
+                <aside className="col-span-12 lg:col-span-4">
+                    <div className="rounded-[24px] border border-white/10 bg-[#131316]/70 p-6 backdrop-blur-xl">
+                        <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-[#9a9aa4]">
+                            All tags
+                        </h2>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                            {sortedTags.map((t) => (
+                                <Tag
+                                    tag={t}
+                                    key={t}
+                                    count={tags[t]}
+                                    current={slug(t) === tag}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </aside>
             </div>
-        </div>
+        </section>
     );
 }

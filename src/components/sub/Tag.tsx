@@ -20,10 +20,10 @@ export function Tag({ tag, current, count, className, tailwind }: TagProps) {
         <Link
             href={`/tags/${slug(tag)}`}
             className={cn(
-                "font-mono inline-flex items-center rounded-md border px-2.5 py-1 text-xs no-underline transition-colors",
+                "font-mono inline-flex items-center rounded-md border px-2.5 py-1 text-xs no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b]",
                 current
-                    ? "border-[#2dd4bf]/40 bg-[#2dd4bf]/10 text-[#2dd4bf]"
-                    : "border-white/10 text-[#9a9aa4] hover:border-[#2dd4bf]/40 hover:text-[#2dd4bf]",
+                    ? "border-[#22d3ee]/40 bg-[#22d3ee]/10 text-[#22d3ee]"
+                    : "border-white/10 text-[#9a9aa4] hover:border-[#22d3ee]/40 hover:text-[#22d3ee]",
                 className,
                 tailwind,
             )}

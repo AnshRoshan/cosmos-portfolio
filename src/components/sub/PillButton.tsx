@@ -1,43 +1,90 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import ZigzagBorder from "./ZigzagBorder";
 
 /**
- * Single pill-button system for the whole site. One accent (mint #2dd4bf), one
- * shape (full pill). `primary` = solid mint on ink (high contrast); `ghost` =
- * hairline outline on the dark background. Tactile press on :active.
+ * Pill-button system. `primary` = solid mint; `ghost` = hairline outline;
+ * `electric` = a conic gradient spins around the border behind a dark inner
+ * pill (hero CTA). `sweep` adds a left→right mint shine on hover (ghost/primary).
  */
 export default function PillButton({
     href,
     children,
     variant = "primary",
     external = false,
+    sweep = false,
     className,
 }: {
     href: string;
     children: React.ReactNode;
-    variant?: "primary" | "ghost";
+    variant?: "primary" | "ghost" | "electric";
     external?: boolean;
+    sweep?: boolean;
     className?: string;
 }) {
+    // ── Electric: jagged rainbow zigzag outline + dark pill ─────────────────
+    if (variant === "electric") {
+        const cls = cn(
+            "group relative inline-flex h-12 items-center justify-center gap-2 overflow-hidden rounded-full bg-[#0a0a0b] px-7 text-sm font-medium uppercase tracking-[0.12em] text-[#e7e7ea] transition-transform active:scale-[0.97] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b]",
+            className,
+        );
+        const inner = (
+            <>
+                <ZigzagBorder />
+                <span
+                    aria-hidden
+                    className="btn-glare pointer-events-none absolute inset-y-0 left-0 z-[1] w-[45%] bg-gradient-to-r from-transparent via-white/20 to-transparent blur-md"
+                />
+                <span className="relative z-10 inline-flex items-center gap-2">
+                    {children}
+                </span>
+            </>
+        );
+        return external ? (
+            <a href={href} target="_blank" rel="noreferrer" className={cls}>
+                {inner}
+            </a>
+        ) : (
+            <Link href={href} className={cls}>
+                {inner}
+            </Link>
+        );
+    }
+
+    // ── Primary / ghost ─────────────────────────────────────────────────────
     const base =
-        "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-medium uppercase tracking-[0.12em] whitespace-nowrap transition-all duration-200 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2dd4bf] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b]";
+        "group relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-medium uppercase tracking-[0.12em] whitespace-nowrap transition-all duration-200 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b]";
     const variants = {
         primary:
-            "bg-[#2dd4bf] text-[#0a0a0b] hover:bg-[#5eead4] shadow-[0_8px_30px_rgba(45,212,191,0.25)]",
+            "bg-[#22d3ee] text-[#0a0a0b] hover:bg-[#67e8f9] shadow-[0_8px_30px_rgba(34,211,238,0.25)]",
         ghost: "border border-white/15 text-[#e7e7ea] hover:bg-white/[0.06] hover:border-white/30",
-    };
-    const cls = cn(base, variants[variant], className);
+    } as const;
+    const cls = cn(base, variants[variant], sweep && "overflow-hidden", className);
+
+    const inner = (
+        <>
+            {sweep ? (
+                <span
+                    aria-hidden
+                    className="pointer-events-none absolute left-[-60%] top-0 h-full w-[45%] -skew-x-12 bg-gradient-to-r from-transparent via-[#22d3ee]/30 to-transparent blur-md transition-all duration-[1600ms] ease-in-out group-hover:left-[120%]"
+                />
+            ) : null}
+            <span className="relative z-10 inline-flex items-center gap-2">
+                {children}
+            </span>
+        </>
+    );
 
     if (external) {
         return (
             <a href={href} target="_blank" rel="noreferrer" className={cls}>
-                {children}
+                {inner}
             </a>
         );
     }
     return (
         <Link href={href} className={cls}>
-            {children}
+            {inner}
         </Link>
     );
 }

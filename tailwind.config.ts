@@ -20,6 +20,17 @@ const config = {
     extend: {
 
       colors: {
+        // Cool Ink + Mint brand palette. Namespaced as `brand-*` so it does not
+        // clash with the shadcn `accent`/`muted` tokens (which are grays).
+        // Use these instead of hardcoded hex going forward.
+        brand: {
+          ink: "#0a0a0b",
+          surface: "#131316",
+          paper: "#e7e7ea",
+          muted: "#9a9aa4",
+          mint: "#22d3ee",
+          "mint-bright": "#67e8f9",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

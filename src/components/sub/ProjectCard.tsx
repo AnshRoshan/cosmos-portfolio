@@ -1,91 +1,151 @@
 "use client";
 
 import { IconArrowUpRight, IconBrandGithub } from "@tabler/icons-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRef } from "react";
 import type { Project } from "@/data/projects";
-import TiltCard from "@/components/sub/TiltCard";
 
 /**
- * Shared project card used by the homepage "Selected work" grid and the full
- * /projects page. Image-forward with a 3D hover tilt; when a project has no
- * screenshot it falls back to a mint gradient panel with the title.
- * Cool Ink + Mint palette: surface #131316, accent #2dd4bf.
+ * Compact project card for the homepage "Selected work" 3-up and the full
+ * /projects gallery. Image-led, with a cursor-following mint spotlight (adapted
+ * from a pattern we liked), hover-revealed action buttons, and a 2-line clamped
+ * description so long copy never blows up the card. Cool Ink + Mint.
  */
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({
+    project,
+    index,
+}: {
+    project: Project;
+    index?: number;
+}) {
+    const { slug, title, category, description, tags, image, live, github, year } =
+        project;
+    const ref = useRef<HTMLElement>(null);
+
+    function onMove(e: React.MouseEvent<HTMLElement>) {
+        const el = ref.current;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    }
+
     return (
-        <TiltCard max={6} className="h-full">
-            <article className="group relative flex h-full flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#131316]/70 backdrop-blur-xl transition-colors duration-300 hover:border-[#2dd4bf]/40">
-                {/* Media */}
-                <div className="relative aspect-[16/10] overflow-hidden">
-                    {project.image ? (
-                        <img
-                            src={project.image}
-                            alt={project.title}
-                            loading="lazy"
-                            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                        />
-                    ) : (
-                        <div className="grid h-full w-full place-items-center bg-[radial-gradient(120%_120%_at_30%_0%,rgba(45,212,191,0.22),transparent_55%)]">
-                            <span className="font-display px-6 text-center text-2xl font-semibold tracking-tight text-[#e7e7ea]/90">
-                                {project.title}
-                            </span>
-                        </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b] via-transparent to-transparent" />
-                    <span className="font-mono absolute left-4 top-4 rounded-full bg-[#0a0a0b]/70 px-3 py-1 text-[10.5px] uppercase tracking-[0.18em] text-[#2dd4bf] backdrop-blur-md">
-                        {project.category}
+        <div className="group h-full">
+        <article
+            ref={ref}
+            onMouseMove={onMove}
+            className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#131316]/60 backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1 group-hover:border-[#22d3ee]/40 group-hover:bg-[#131316]/80"
+        >
+            {/* Cursor-following mint spotlight */}
+            <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 z-20 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                style={{
+                    background:
+                        "radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%), rgba(34,211,238,0.12), transparent 70%)",
+                }}
+            />
+
+            {/* Media */}
+            <div className="relative aspect-[16/10] overflow-hidden">
+                {image ? (
+                    <Image
+                        src={image}
+                        alt={title}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                    />
+                ) : (
+                    <div className="grid h-full w-full place-items-center bg-[radial-gradient(120%_120%_at_30%_0%,rgba(34,211,238,0.20),transparent_55%)]">
+                        <span className="font-display px-6 text-center text-xl font-semibold tracking-tight text-[#e7e7ea]/90">
+                            {title}
+                        </span>
+                    </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b]/85 via-[#0a0a0b]/5 to-transparent" />
+
+                {/* Hover action buttons */}
+                <div className="absolute right-3 top-3 z-30 flex gap-2 opacity-0 translate-y-1 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                    {live ? (
+                        <a
+                            href={live}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`${title} live site`}
+                            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#22d3ee] text-[#0a0a0b] transition-colors hover:bg-[#67e8f9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b]"
+                        >
+                            <IconArrowUpRight size={16} stroke={2} />
+                        </a>
+                    ) : null}
+                    {github ? (
+                        <a
+                            href={github}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`${title} on GitHub`}
+                            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-[#0a0a0b]/70 text-[#e7e7ea] backdrop-blur-md transition-colors hover:border-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b]"
+                        >
+                            <IconBrandGithub size={16} stroke={2} />
+                        </a>
+                    ) : null}
+                </div>
+
+                {/* Category badge */}
+                <span className="font-mono absolute bottom-3 left-3 z-10 rounded-full bg-[#0a0a0b]/70 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-[#22d3ee] backdrop-blur-md">
+                    {category}
+                </span>
+            </div>
+
+            {/* Faint index watermark */}
+            {typeof index === "number" ? (
+                <span
+                    aria-hidden
+                    className="font-display pointer-events-none absolute bottom-0 right-3 z-[5] text-7xl font-bold leading-none text-white/[0.05]"
+                >
+                    {String(index + 1).padStart(2, "0")}
+                </span>
+            ) : null}
+
+            {/* Body */}
+            <div className="relative z-10 flex flex-1 flex-col gap-2.5 p-5">
+                <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="font-display text-lg font-semibold tracking-tight text-[#e7e7ea] transition-colors group-hover:text-[#22d3ee]">
+                        <Link
+                            href={`/projects/${slug}`}
+                            className="rounded-sm before:absolute before:inset-0 before:z-10 before:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b]"
+                        >
+                            {title}
+                        </Link>
+                    </h3>
+                    <span className="font-mono shrink-0 text-xs text-[#9a9aa4]">
+                        {year}
                     </span>
                 </div>
 
-                {/* Body */}
-                <div className="flex flex-1 flex-col p-6">
-                    <div className="flex items-baseline justify-between gap-4">
-                        <h3 className="font-display text-xl font-semibold tracking-tight text-[#e7e7ea] md:text-2xl">
-                            {project.title}
-                        </h3>
-                        <span className="font-mono shrink-0 text-xs text-[#9a9aa4]">
-                            {project.year}
+                <p className="line-clamp-2 text-sm leading-relaxed text-[#9a9aa4]">
+                    {description}
+                </p>
+
+                <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-2">
+                    {tags.slice(0, 3).map((tag) => (
+                        <span
+                            key={tag}
+                            className="font-mono rounded-md border border-white/10 px-2 py-0.5 text-[10px] text-[#9a9aa4]"
+                        >
+                            {tag}
                         </span>
-                    </div>
-
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-[#9a9aa4]">
-                        {project.description}
-                    </p>
-
-                    <div className="mt-5 flex flex-wrap gap-1.5">
-                        {project.tags.map((tag) => (
-                            <span
-                                key={tag}
-                                className="font-mono rounded-md border border-white/10 px-2 py-1 text-[10.5px] text-[#9a9aa4]"
-                            >
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-
-                    <div className="mt-6 flex flex-wrap items-center gap-2.5">
-                        {project.live ? (
-                            <a
-                                href={project.live}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-1.5 rounded-full bg-[#2dd4bf] px-4 py-2 text-xs font-medium uppercase tracking-[0.12em] text-[#0a0a0b] transition-colors hover:bg-[#5eead4]"
-                            >
-                                Live <IconArrowUpRight size={15} stroke={2} />
-                            </a>
-                        ) : null}
-                        {project.github ? (
-                            <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-2 text-xs font-medium uppercase tracking-[0.12em] text-[#e7e7ea] transition-colors hover:border-white/30 hover:bg-white/[0.06]"
-                            >
-                                Code <IconBrandGithub size={15} stroke={2} />
-                            </a>
-                        ) : null}
-                    </div>
+                    ))}
+                    {tags.length > 3 ? (
+                        <span className="font-mono text-[10px] text-[#9a9aa4]">
+                            +{tags.length - 3}
+                        </span>
+                    ) : null}
                 </div>
-            </article>
-        </TiltCard>
+            </div>
+        </article>
+        </div>
     );
 }

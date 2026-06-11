@@ -10,8 +10,14 @@ import { usePathname } from "next/navigation";
  * bandwidth; the browser falls back to mp4 only where one is provided.
  */
 const SOURCES = {
-    space: { webm: "/hero-bg.webm", mp4: "/hero-bg.mp4" }, // cosmic space voyage
-    vex: { webm: "/bg-vex.webm" }, // dark abstract (About page)
+    // cosmic space voyage
+    space: {
+        webm: "/hero-bg.webm",
+        mp4: "/hero-bg.mp4",
+        poster: "/hero-bg-poster.webp",
+    },
+    // dark abstract (About page)
+    vex: { webm: "/bg-vex.webm", poster: "/bg-vex-poster.webp" },
 } as const;
 
 function variantFor(pathname: string | null): keyof typeof SOURCES {
@@ -35,8 +41,9 @@ export default function BackgroundVideo() {
                 loop
                 muted
                 playsInline
-                preload="auto"
-                className="h-full w-full object-cover opacity-90"
+                preload="metadata"
+                poster={src.poster}
+                className="h-full w-full object-cover opacity-[0.5]"
             >
                 <source src={src.webm} type="video/webm" />
                 {"mp4" in src ? (
@@ -45,7 +52,7 @@ export default function BackgroundVideo() {
             </video>
 
             {/* Readability scrim: darker top/bottom, lighter middle */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0b]/80 via-[#0a0a0b]/45 to-[#0a0a0b]/90" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0b]/85 via-[#0a0a0b]/65 to-[#0a0a0b]/95" />
             {/* Side vignette */}
             <div
                 className="absolute inset-0"

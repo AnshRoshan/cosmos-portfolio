@@ -1,27 +1,29 @@
-"use client";
-
 import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 import ProjectCard from "@/components/sub/ProjectCard";
 import Reveal from "@/components/sub/Reveal";
 import SplitReveal from "@/components/sub/SplitReveal";
-import { featuredProjects } from "@/data/projects";
+import { getFeaturedProjects } from "@/sanity/lib/projects";
 
-export default function Projects() {
+export default async function Projects() {
+    // Homepage shows a tight, curated set — at most three. The full list lives
+    // on /projects. Control which three via `featured` + `order` in the CMS.
+    const featuredProjects = (await getFeaturedProjects()).slice(0, 3);
+
     return (
         <section
             id="projects"
-            className="relative mx-auto w-full max-w-[1400px] px-6 py-24 md:px-10 md:py-32"
+            className="relative mx-auto w-full max-w-[1400px] px-6 py-16 md:px-10 md:py-24"
         >
             <div className="mb-14 md:mb-20">
                 <Reveal y={24}>
-                    <span className="font-mono inline-flex items-center gap-2.5 text-xs uppercase tracking-[0.22em] text-[#9a9aa4]">
-                        <span className="h-px w-8 bg-[#2dd4bf]" />
+                    <span className="font-mono inline-flex items-center gap-2.5 text-sm uppercase tracking-[0.22em] text-[#9a9aa4]">
+                        <span className="h-px w-8 bg-[#22d3ee]" />
                         Work
                     </span>
                 </Reveal>
                 <SplitReveal className="mt-6">
-                    <h2 className="font-display text-4xl font-semibold tracking-tight text-[#e7e7ea] sm:text-5xl lg:text-6xl">
+                    <h2 className="text-gradient font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
                         Selected work
                     </h2>
                 </SplitReveal>
@@ -33,10 +35,10 @@ export default function Projects() {
                 </Reveal>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
                 {featuredProjects.map((project, i) => (
                     <Reveal key={project.slug} delay={i * 0.08} y={36}>
-                        <ProjectCard project={project} />
+                        <ProjectCard project={project} index={i} />
                     </Reveal>
                 ))}
             </div>
@@ -45,7 +47,7 @@ export default function Projects() {
                 <div className="mt-14 flex justify-center">
                     <Link
                         href="/projects"
-                        className="group inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.16em] text-[#e7e7ea] transition-colors hover:text-[#2dd4bf]"
+                        className="group inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.16em] text-[#e7e7ea] transition-colors hover:text-[#22d3ee]"
                     >
                         View all projects
                         <IconArrowRight

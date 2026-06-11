@@ -1,23 +1,33 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import {
-    motion,
-    useScroll,
-    useTransform,
-    useReducedMotion,
-    type MotionValue,
-} from "framer-motion";
+import { motion, type MotionValue, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 /**
- * Character-by-character scroll reveal: each character ramps from dim to full
- * opacity as the paragraph travels through the viewport.
- *
- * The scroll-driven version (which calls useScroll against a ref) is rendered
- * only after mount. Server and first client paint render plain text, so there
- * is no hydration mismatch and useScroll never runs against an un-hydrated ref.
- * Under reduced motion it stays as plain, fully-opaque text.
+ * Scroll-linked word reveal (Luma / Superhuman style). Each word fades from
+ * dim to full as the paragraph scrubs through the viewport — driven by scroll
+ * position, not a one-shot trigger. Word-level (not per-char) for performance.
+ * Color/size come from `className`; only opacity is animated here.
  */
+function Word({
+    children,
+    progress,
+    range,
+}: {
+    children: string;
+    progress: MotionValue<number>;
+    range: [number, number];
+}) {
+    // Floor kept readable (passes contrast) so the text is legible even before
+    // it scrolls into range; the reveal then lifts it to full.
+    const opacity = useTransform(progress, range, [0.4, 1]);
+    return (
+        <motion.span style={{ opacity }} className="mr-[0.25em] inline-block">
+            {children}
+        </motion.span>
+    );
+}
+
 export default function AnimatedText({
     text,
     className,
@@ -25,61 +35,30 @@ export default function AnimatedText({
     text: string;
     className?: string;
 }) {
-    const [mounted, setMounted] = useState(false);
-    const reduce = useReducedMotion();
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted || reduce) {
-        return <p className={className}>{text}</p>;
-    }
-
-    return <ScrollReveal text={text} className={className} />;
-}
-
-function ScrollReveal({ text, className }: { text: string; className?: string }) {
     const ref = useRef<HTMLParagraphElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
-        offset: ["start 0.8", "end 0.45"],
+        offset: ["start 0.85", "end 0.5"],
     });
 
-    const chars = text.split("");
+    const words = text.split(" ");
 
     return (
-        <p ref={ref} className={className} aria-label={text}>
-            {chars.map((char, i) => {
-                const start = i / chars.length;
-                const end = start + 1 / chars.length;
+        <p ref={ref} className={className}>
+            {words.map((word, i) => {
+                const start = i / words.length;
+                const end = start + 1 / words.length;
                 return (
-                    <Char
-                        key={`${char}-${i}`}
+                    <Word
+                        // biome-ignore lint/suspicious/noArrayIndexKey: words are positional and static
+                        key={i}
                         progress={scrollYProgress}
                         range={[start, end]}
                     >
-                        {char}
-                    </Char>
+                        {word}
+                    </Word>
                 );
             })}
         </p>
-    );
-}
-
-function Char({
-    children,
-    progress,
-    range,
-}: {
-    children: React.ReactNode;
-    progress: MotionValue<number>;
-    range: [number, number];
-}) {
-    const opacity = useTransform(progress, range, [0.18, 1]);
-    return (
-        <motion.span style={{ opacity }} aria-hidden="true">
-            {children}
-        </motion.span>
     );
 }

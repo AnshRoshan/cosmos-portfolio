@@ -17,9 +17,9 @@ const Footer = () => {
 
                     {/* Left - wordmark + tagline + mail */}
                     <div className="flex flex-col gap-3">
-                        <Link href="/" aria-label="Home">
+                        <Link href="/" aria-label="Ansh Roshan, home">
                             <span className="font-display text-lg font-semibold text-[#e7e7ea]">
-                                Ansh<span className="text-[#2dd4bf]">.</span>
+                                Ansh<span className="text-[#22d3ee]">.</span>
                             </span>
                         </Link>
 
@@ -29,8 +29,7 @@ const Footer = () => {
 
                         <a
                             href="mailto:anshroshan813210@gmail.com"
-                            className="inline-flex items-center gap-1.5 font-mono text-xs text-[#9a9aa4] transition-colors duration-200 hover:text-[#2dd4bf]"
-                            aria-label="Send email to Ansh Roshan"
+                            className="inline-flex items-center gap-1.5 font-mono text-xs text-[#9a9aa4] transition-colors duration-200 hover:text-[#22d3ee]"
                         >
                             <IconMail size={16} stroke={1.6} />
                             anshroshan813210@gmail.com
@@ -52,7 +51,7 @@ const Footer = () => {
                                     <li key={href}>
                                         <Link
                                             href={href}
-                                            className="font-mono text-xs uppercase tracking-[0.16em] text-[#9a9aa4] transition-colors duration-200 hover:text-[#5eead4]"
+                                            className="rounded-sm font-mono text-xs uppercase tracking-[0.22em] text-[#9a9aa4] transition-colors duration-200 hover:text-[#22d3ee] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0b]"
                                         >
                                             {label}
                                         </Link>
@@ -68,7 +67,7 @@ const Footer = () => {
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label="GitHub"
-                                className="text-[#9a9aa4] transition-colors duration-200 hover:text-[#2dd4bf]"
+                                className="text-[#9a9aa4] transition-colors duration-200 hover:text-[#22d3ee]"
                             >
                                 <IconBrandGithub size={20} stroke={1.6} />
                             </a>
@@ -77,7 +76,7 @@ const Footer = () => {
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label="LinkedIn"
-                                className="text-[#9a9aa4] transition-colors duration-200 hover:text-[#2dd4bf]"
+                                className="text-[#9a9aa4] transition-colors duration-200 hover:text-[#22d3ee]"
                             >
                                 <IconBrandLinkedin size={20} stroke={1.6} />
                             </a>
@@ -86,7 +85,7 @@ const Footer = () => {
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label="X (Twitter)"
-                                className="text-[#9a9aa4] transition-colors duration-200 hover:text-[#2dd4bf]"
+                                className="text-[#9a9aa4] transition-colors duration-200 hover:text-[#22d3ee]"
                             >
                                 <IconBrandX size={20} stroke={1.6} />
                             </a>

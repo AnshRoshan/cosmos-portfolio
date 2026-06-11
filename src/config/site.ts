@@ -1,8 +1,23 @@
 export const siteConfig = {
     name: "Ansh Roshan",
-    description: "This is my portfolio",
+    title: "Ansh Roshan, Gen AI Developer",
+    description:
+        "Gen AI Developer building agentic systems, RAG pipelines, and full-stack AI products that ship to production. LangChain, LangGraph, and multi-model orchestration, end to end.",
     url: "https://anshroshan.com",
     author: "Ansh Roshan",
+    keywords: [
+        "Ansh Roshan",
+        "Gen AI Developer",
+        "Generative AI",
+        "LangChain",
+        "LangGraph",
+        "RAG pipelines",
+        "Agentic systems",
+        "LLM applications",
+        "Full-stack developer",
+        "Next.js",
+        "AI engineer",
+    ],
     links: {
         github: "http://www.github.com/anshroshan",
         linkedin: "http://www.linkedin.com/in/anshroshan",

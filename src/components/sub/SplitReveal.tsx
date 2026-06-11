@@ -37,7 +37,11 @@ export default function SplitReveal({
         () => {
             const el = ref.current;
             if (!el) return;
-            const split = SplitText.create(el, {
+            // Split the heading element itself (not the wrapper div) so SplitText's
+            // generated aria-label lands on an element that allows it — a bare
+            // <div> with aria-label is a prohibited-attribute a11y violation.
+            const target = (el.firstElementChild as HTMLElement) ?? el;
+            const split = SplitText.create(target, {
                 type: "words",
                 mask: "words",
                 aria: "auto",
