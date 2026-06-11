@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { siteConfig } from "@/config/site";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 const interBold = fetch(
     new URL("../../../assets/fonts/Inter-Bold.ttf", import.meta.url),
