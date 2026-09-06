@@ -1,5 +1,6 @@
 import Hero from "@/components/main/Hero";
 import Marquee from "@/components/main/Marquee";
+import NowBuilding from "@/components/main/NowBuilding";
 import Projects from "@/components/main/Projects";
 import { siteConfig } from "@/config/site";
 
@@ -27,6 +28,7 @@ export default function Home() {
             <Hero />
             <Marquee />
             <Projects />
+            <NowBuilding />
         </div>
     );
 }

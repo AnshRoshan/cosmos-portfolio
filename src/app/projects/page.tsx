@@ -10,7 +10,10 @@ export const metadata: Metadata = {
         "Selected work by Ansh Roshan, from Gen AI models to full-stack products.",
 };
 
+// Shipped work only; in-flight projects live in the home page's
+// "Now building" rail.
 export default function ProjectsPage() {
+    const shipped = projects.filter((p) => p.status !== "building");
     return (
         <section className="relative mx-auto w-full max-w-[1400px] px-6 pt-12 pb-24 md:px-10 md:pt-16 md:pb-32">
             <div className="mb-14 md:mb-20">
@@ -34,7 +37,7 @@ export default function ProjectsPage() {
             </div>
 
             <Reveal y={24}>
-                <ProjectsGallery projects={projects} />
+                <ProjectsGallery projects={shipped} />
             </Reveal>
         </section>
     );

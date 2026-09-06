@@ -49,32 +49,34 @@ const focusItems = [
 
 // Career + education timeline, newest first (top) → oldest (bottom).
 // Each entry branches off the central stem in its own colour.
-// TODO(Ansh): replace every [bracketed] placeholder with real years / names.
+// University / school entries still carry [bracketed] placeholders.
 const journey = [
     {
         period: "2024 — Present",
         title: "Gen AI Developer",
         org: "TCS (Tata Consultancy Services)",
         detail:
-            "Building agentic systems, RAG pipelines, and full-stack AI products that ship to production.",
+            "Designing and shipping agentic systems and RAG pipelines for enterprise clients. Built multi-step LangGraph agents with tool use, memory, and human approval gates; designed retrieval pipelines with hybrid search, reranking, and eval-driven chunking; owned the full path from FastAPI services to React front ends to Docker and cloud deployment.",
         accent: "#22d3ee", // cyan
         icon: IconBriefcase,
         current: true,
     },
     {
-        period: "[Years]",
-        title: "[Earlier role at TCS, e.g. Systems Engineer]",
-        org: "TCS (Tata Consultancy Services)",
-        detail: "[What you worked on before moving into Gen AI. Remove this entry if not needed.]",
+        period: "2022 — 2024",
+        title: "Full-stack Developer",
+        org: "Freelance & open source",
+        detail:
+            "Shipped storefronts, social apps, and internal tools on Next.js and MongoDB — a Stripe-backed ecommerce store from catalogue to completed order, and a social platform with auth, feeds, and a responsive interface. The foundations I now use for AI products.",
         accent: "#a78bfa", // violet
         icon: IconBriefcase,
         current: false,
     },
     {
-        period: "[20XX — 20XX]",
-        title: "B.Tech, [branch]",
+        period: "2020 — 2024",
+        title: "B.Tech, Computer Science",
         org: "[College / University name]",
-        detail: "[One line: specialisation, a key project, or a result.]",
+        detail:
+            "Focus on machine learning, data structures, and distributed systems. Final-year work on clinical risk prediction.",
         accent: "#34d399", // emerald
         icon: IconCertificate,
         current: false,
@@ -99,26 +101,25 @@ const journey = [
     },
 ] as const;
 
-// Certifications & achievements.
-// TODO(Ansh): paste your real entries from LinkedIn "Licenses & certifications".
-// Add `url` (credential link) to make a card clickable; leave "" if none.
+// Certifications & achievements. Add `url` (credential link) to make a card
+// clickable; leave "" if none.
 const certifications = [
     {
-        name: "[Certification name]",
-        issuer: "[Issuer, e.g. AWS / Microsoft / DeepLearning.AI]",
-        year: "[20XX]",
+        name: "Claude Code Certified Developer",
+        issuer: "Anthropic",
+        year: "2026",
         url: "",
     },
     {
-        name: "[Certification name]",
-        issuer: "[Issuer]",
-        year: "[20XX]",
+        name: "Claude Code Certified Architect",
+        issuer: "Anthropic",
+        year: "2026",
         url: "",
     },
     {
-        name: "[Achievement / hackathon win]",
-        issuer: "[Organiser]",
-        year: "[20XX]",
+        name: "AWS Certified Solutions Architect",
+        issuer: "Amazon Web Services",
+        year: "2026 (planned)",
         url: "",
     },
 ] as const;

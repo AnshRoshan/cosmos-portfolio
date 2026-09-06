@@ -6,6 +6,11 @@
  * /public/projects/, and set `featured: true` to surface it on the homepage.
  * `image` is optional; when omitted the card renders a mint gradient panel.
  */
+export type ProjectStatus = "shipped" | "building";
+
+/** Progress meter for in-flight work, shown in the "Now building" rail. */
+export type ProjectStage = "Idea" | "Prototype" | "Alpha" | "Beta" | "Live";
+
 export type Project = {
     slug: string;
     title: string;
@@ -17,6 +22,10 @@ export type Project = {
     github?: string;
     year: string;
     featured?: boolean;
+    /** Defaults to "shipped"; "building" surfaces in the Now-building rail. */
+    status?: ProjectStatus;
+    /** Only meaningful while status === "building". */
+    stage?: ProjectStage;
 };
 
 export type ProjectMetric = { value: string; label: string };
@@ -43,6 +52,7 @@ export const projects: Project[] = [
         description:
             "A classification model that predicts heart-failure risk from clinical features, with data cleaning, feature engineering, and model evaluation in a reproducible notebook.",
         tags: ["Python", "scikit-learn", "Pandas"],
+        image: "/projects/heart-disease.jpg",
         live: "https://colab.research.google.com/drive/1FiQ-stb81wMvrwq-94k5bpvVK8D5MS55?usp=sharing",
         github:
             "https://colab.research.google.com/drive/1FiQ-stb81wMvrwq-94k5bpvVK8D5MS55?usp=sharing",
@@ -100,6 +110,48 @@ export const projects: Project[] = [
         github: "https://github.com/AnshRoshan/React-Projects",
         year: "2023",
     },
+    /* ───────────── In flight — surfaced in the "Now building" rail ───────────── */
+    {
+        slug: "multi-agent-research",
+        title: "Multi-agent research assistant",
+        category: "Gen AI",
+        description:
+            "A LangGraph crew that plans, searches, verifies, and drafts a sourced brief. Human-in-the-loop checkpoints before anything is finalised.",
+        tags: ["LangGraph", "Claude", "FastAPI", "Postgres"],
+        year: "2026",
+        status: "building",
+        stage: "Alpha",
+        github: "https://github.com/anshroshan",
+    },
+    {
+        slug: "rag-eval-harness",
+        title: "RAG evaluation harness",
+        category: "Gen AI",
+        description:
+            "Retrieval and answer-quality evals that run in CI, tracking faithfulness, context precision, and regressions across chunking strategies.",
+        tags: ["Python", "LlamaIndex", "pgvector"],
+        year: "2026",
+        status: "building",
+        stage: "Prototype",
+    },
+    {
+        slug: "claude-code-toolkit",
+        title: "Claude Code agent toolkit",
+        category: "Tooling",
+        description:
+            "Reusable skills, hooks, and MCP servers that make Claude Code a reliable teammate on real repos. Grown out of the certification work.",
+        tags: ["Claude Code", "MCP", "TypeScript"],
+        year: "2026",
+        status: "building",
+        stage: "Beta",
+    },
 ];
 
-export const featuredProjects: Project[] = projects.filter((p) => p.featured);
+export const featuredProjects: Project[] = projects.filter(
+    (p) => p.featured && p.status !== "building",
+);
+
+/** In-flight projects for the Now-building rail, newest stage first. */
+export const buildingProjects: Project[] = projects.filter(
+    (p) => p.status === "building",
+);

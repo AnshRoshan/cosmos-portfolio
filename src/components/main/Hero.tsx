@@ -12,6 +12,16 @@ const Hero = () => {
             <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
                 {/* Left: copy */}
                 <div className="order-2 lg:order-1">
+                    {/* Availability signal for recruiters scanning the fold */}
+                    <Reveal y={-12}>
+                        <span className="font-mono mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#22d3ee]/30 bg-[#22d3ee]/[0.08] px-4 py-1.5 text-[11px] uppercase tracking-[0.18em] text-[#9a9aa4]">
+                            <span className="relative flex h-1.5 w-1.5">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22d3ee] opacity-60" />
+                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#22d3ee]" />
+                            </span>
+                            Open to Gen AI roles and collaborations
+                        </span>
+                    </Reveal>
                     <Reveal y={-12}>
                         <span className="font-mono inline-flex items-center gap-2.5 text-sm uppercase tracking-[0.22em] text-[#9a9aa4]">
                             <span className="h-px w-8 bg-[#22d3ee]" />
