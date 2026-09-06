@@ -45,7 +45,7 @@ const Footer = () => {
                                 {[
                                     { label: "About", href: "/about" },
                                     { label: "Projects", href: "/projects" },
-                                    { label: "Blog", href: "/blog" },
+                                    { label: "Blog", href: "https://blog.anshroshan.com" },
                                     { label: "Contact", href: "/contact" },
                                 ].map(({ label, href }) => (
                                     <li key={href}>

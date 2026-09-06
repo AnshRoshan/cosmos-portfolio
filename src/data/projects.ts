@@ -24,7 +24,7 @@ export type ProjectMetric = { value: string; label: string };
 /**
  * A project plus its optional case-study content, used by /projects/[slug].
  * Everything beyond `Project` is optional: a project with no case study still
- * renders a clean overview page. Authored in Sanity Studio.
+ * renders a clean overview page. Authored in src/data/projects.ts.
  */
 export type ProjectDetail = Project & {
     problem?: string;

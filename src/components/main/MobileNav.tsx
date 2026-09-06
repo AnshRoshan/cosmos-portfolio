@@ -16,7 +16,7 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 const navItems = [
     { name: "About", link: "/about" },
     { name: "Projects", link: "/projects" },
-    { name: "Blogs", link: "/blog" },
+    { name: "Blogs", link: "https://blog.anshroshan.com" },
     { name: "Contact", link: "/contact" },
 ];
 
@@ -66,6 +66,8 @@ export function MobileNav() {
                                     key={item.name}
                                     href={item.link}
                                     onClick={() => setOpen(false)}
+                                    target={item.link.startsWith("http") ? "_blank" : undefined}
+                                    rel={item.link.startsWith("http") ? "noreferrer" : undefined}
                                     className={
                                         "font-display rounded-xl px-4 py-3 text-2xl font-medium tracking-tight transition-colors " +
                                         (active

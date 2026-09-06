@@ -41,11 +41,6 @@ export const metadata: Metadata = {
     keywords: siteConfig.keywords,
     alternates: {
         canonical: "/",
-        types: {
-            "application/rss+xml": [
-                { url: "/rss.xml", title: `${siteConfig.name}: Writing` },
-            ],
-        },
     },
     openGraph: {
         type: "website",

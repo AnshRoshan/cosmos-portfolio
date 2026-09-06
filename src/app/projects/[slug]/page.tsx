@@ -7,19 +7,21 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PortableTextContent } from "@/components/main/PortableTextContent";
 import PillButton from "@/components/sub/PillButton";
 import ProjectCard from "@/components/sub/ProjectCard";
 import Reveal from "@/components/sub/Reveal";
 import { siteConfig } from "@/config/site";
-import { getProject, getProjects } from "@/sanity/lib/projects";
+import { projects, type ProjectDetail } from "@/data/projects";
 
 interface ProjectPageProps {
     params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-    const projects = await getProjects();
+function getProject(slug: string): ProjectDetail | undefined {
+    return projects.find((p) => p.slug === slug);
+}
+
+export function generateStaticParams(): { slug: string }[] {
     return projects.map((p) => ({ slug: p.slug }));
 }
 
@@ -27,7 +29,7 @@ export async function generateMetadata({
     params,
 }: ProjectPageProps): Promise<Metadata> {
     const { slug } = await params;
-    const project = await getProject(slug);
+    const project = getProject(slug);
     if (!project) return {};
 
     const ogSearch = new URLSearchParams();
@@ -71,11 +73,10 @@ function CaseSection({ title, body }: { title: string; body: string }) {
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
     const { slug } = await params;
-    const project = await getProject(slug);
+    const project = getProject(slug);
     if (!project) notFound();
 
-    const allProjects = await getProjects();
-    const moreProjects = allProjects.filter((p) => p.slug !== slug).slice(0, 3);
+    const moreProjects = projects.filter((p) => p.slug !== slug).slice(0, 3);
 
     const {
         title,
@@ -91,10 +92,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         outcome,
         metrics,
         gallery,
-        body,
     } = project;
-
-    const hasBody = Array.isArray(body) && body.length > 0;
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -207,13 +205,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <CaseSection title="Approach & architecture" body={approach} />
             ) : null}
             {outcome ? <CaseSection title="Outcome" body={outcome} /> : null}
-
-            {/* Long-form write-up */}
-            {hasBody ? (
-                <div className="prose prose-invert mt-12 max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-[#22d3ee] prose-strong:text-[#e7e7ea] prose-code:text-[#22d3ee]">
-                    <PortableTextContent value={body} />
-                </div>
-            ) : null}
 
             {/* Gallery */}
             {gallery?.length ? (

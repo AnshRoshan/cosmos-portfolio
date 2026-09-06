@@ -3,12 +3,12 @@ import Link from "next/link";
 import ProjectCard from "@/components/sub/ProjectCard";
 import Reveal from "@/components/sub/Reveal";
 import SplitReveal from "@/components/sub/SplitReveal";
-import { getFeaturedProjects } from "@/sanity/lib/projects";
+import { projects } from "@/data/projects";
 
-export default async function Projects() {
+export default function Projects() {
     // Homepage shows a tight, curated set — at most three. The full list lives
-    // on /projects. Control which three via `featured` + `order` in the CMS.
-    const featuredProjects = (await getFeaturedProjects()).slice(0, 3);
+    // on /projects. Control which three via `featured` in src/data/projects.ts.
+    const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
 
     return (
         <section

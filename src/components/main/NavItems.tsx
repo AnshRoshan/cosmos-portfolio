@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrambleTextPlugin);
 const navItems = [
     { name: "About", link: "/about" },
     { name: "Projects", link: "/projects" },
-    { name: "Blogs", link: "/blog" },
+    { name: "Blogs", link: "https://blog.anshroshan.com" },
     { name: "Contact", link: "/contact" },
 ];
 
@@ -84,6 +84,8 @@ function ScrambleLink({
     return (
         <Link
             href={link}
+            target={link.startsWith("http") ? "_blank" : undefined}
+            rel={link.startsWith("http") ? "noreferrer" : undefined}
             onMouseEnter={onEnter}
             onMouseLeave={onLeave}
             onFocus={decode}
