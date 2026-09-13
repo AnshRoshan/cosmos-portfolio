@@ -50,3 +50,7 @@ next-env.d.ts
 
 # Archived/unused assets — kept locally, never shipped
 .archive/
+
+# reference material & local tooling
+enhance-portfolio-website-design/
+.video_agent/
